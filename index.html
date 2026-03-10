@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MAQ Group — Premier Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<style>
+:root{--ink:#0C0B09;--ink2:#141310;--ink3:#1E1C18;--ink4:#2A2820;--gold:#C9A96E;--gold2:#E8C98A;--gold3:#F5DFA8;--gold-dim:#7A6540;--cream:#F2EDE4;--cream2:#E8E0D2;--warm:#9A8B72;--warm2:#6A5E4A;--warm3:#3A342A;--green:#5A9E6F;--red:#C4574C;--blue:#4A7FA5;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;color:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--gold);color:var(--ink);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
+input,select,textarea,button{font-family:'Outfit',sans-serif;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}50%{box-shadow:0 0 0 10px rgba(201,169,110,0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.fa{animation:fadeUp .6s cubic-bezier(.22,.68,0,1.2) both;}
+.fa1{animation-delay:.07s}.fa2{animation-delay:.14s}.fa3{animation-delay:.21s}.fa4{animation-delay:.28s}.fa5{animation-delay:.35s}
+.serif{font-family:'DM Serif Display',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink);padding:13px 28px;border:none;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.04em;transition:all .25s;border-radius:3px;font-family:'Outfit',sans-serif;}
+.btn-gold:hover{background:linear-gradient(135deg,var(--gold2),var(--gold3));transform:translateY(-1px);box-shadow:0 8px 30px rgba(201,169,110,.3);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--cream);padding:13px 28px;border:1px solid rgba(201,169,110,.3);cursor:pointer;font-size:13px;font-weight:400;letter-spacing:.04em;transition:all .25s;border-radius:3px;font-family:'Outfit',sans-serif;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.inp{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(201,169,110,.15);border-radius:3px;color:var(--cream);font-size:14px;outline:none;transition:border-color .2s;font-family:'Outfit',sans-serif;}
+.inp:focus{border-color:var(--gold);background:rgba(255,255,255,.06);}
+.inp::placeholder{color:var(--warm2);}
+.lbl{font-size:10px;color:var(--warm);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:7px;font-weight:500;}
+.tag{display:inline-block;padding:4px 10px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;}
+.tg{background:rgba(201,169,110,.15);color:var(--gold2);border:1px solid rgba(201,169,110,.25);}
+.tgn{background:rgba(90,158,111,.15);color:#7DC89A;border:1px solid rgba(90,158,111,.25);}
+.tgb{background:rgba(74,127,165,.15);color:#6BAACC;border:1px solid rgba(74,127,165,.25);}
+.tgw{background:rgba(154,139,114,.1);color:var(--warm);border:1px solid rgba(154,139,114,.2);}
+.tgr{background:rgba(196,87,76,.12);color:#E88880;border:1px solid rgba(196,87,76,.25);}
+.divr{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.15),transparent);}
+.spinner{width:20px;height:20px;border:2px solid rgba(201,169,110,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+/* Photo grid */
+.photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;border-radius:8px;overflow:hidden;height:420px;}
+.photo-grid-cell{background:linear-gradient(135deg,var(--ink2),var(--ink3));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:filter .2s;}
+.photo-grid-cell:hover{filter:brightness(1.12);}
+.photo-grid-cell:first-child{grid-row:1/3;}
+/* Airbnb-style booking widget */
+.book-widget{background:var(--ink2);border:1px solid rgba(201,169,110,.2);border-radius:12px;padding:24px;position:sticky;top:82px;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+/* Rating stars */
+.stars{color:#FFD700;font-size:13px;letter-spacing:1px;}
+/* Zillow-style stat pill */
+.stat-pill{background:rgba(255,255,255,.04);border:1px solid rgba(201,169,110,.1);border-radius:8px;padding:16px 20px;text-align:center;}
+/* Modal overlay */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s both;padding:20px;}
+/* Amenity icon grid */
+.amen-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.amen-item{display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;font-size:13px;color:var(--warm);}
+/* Review card */
+.review-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,169,110,.08);border-radius:8px;padding:18px 20px;}
+/* Map placeholder */
+.map-placeholder{background:linear-gradient(135deg,#0F1A0F,#0A1520,#1A1208);border-radius:8px;position:relative;overflow:hidden;border:1px solid rgba(201,169,110,.1);}
+.map-pin{position:absolute;width:14px;height:14px;background:var(--gold);border-radius:50%;border:3px solid var(--ink);box-shadow:0 0 0 4px rgba(201,169,110,.3);}
+/* Zillow price history bar */
+.price-bar{height:48px;background:linear-gradient(to top,rgba(201,169,110,.3),rgba(201,169,110,.6));border-radius:2px 2px 0 0;position:relative;transition:height .3s;}
+/* Hide date input calendar icon on some browsers */
+input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.6) sepia(1) saturate(0.5) hue-rotate(10deg);cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useMemo,useEffect,useRef}=React;
+const INK='#0C0B09';
+
+const PROPS=[
+  {id:1,name:"Vacant Lot — Polk County",address:"Polk County, FL",type:"land",sub:"Residential Land",price:5000,emoji:"🌳",lot:"0.25 AC",county:"Polk",state:"FL",avail:494,minDown:10,rate:9.9,maxTerm:48,desc:"Prime residential lots in Polk County — one of Florida's fastest-growing counties between Tampa and Orlando. Paved road access, utilities nearby, no HOA. Owner financed with as little as $500 down."},
+  {id:2,name:"Vacant Lot — California City",address:"California City, CA",type:"land",sub:"Desert Land",price:3500,emoji:"🏜️",lot:"2.5 AC",county:"Kern",state:"CA",avail:268,minDown:10,rate:9.9,maxTerm:48,desc:"Expansive 2.5-acre parcels in California City — the third-largest city by area in California. Ideal for off-grid living, investment, or future development. Flexible owner financing terms."},
+  {id:3,name:"Vacant Lot — Orange County",address:"Orange County, FL",type:"land",sub:"Residential Land",price:8000,emoji:"🌴",lot:"0.15 AC",county:"Orange",state:"FL",avail:187,minDown:10,rate:9.9,maxTerm:48,desc:"Residential lots in Orange County minutes from Orlando's metro core. One of the strongest land appreciation markets in the country, driven by explosive population growth."},
+  {id:4,name:"Vacant Lot — Osceola County",address:"Osceola County, FL",type:"land",sub:"Residential Land",price:6500,emoji:"🌿",lot:"0.20 AC",county:"Osceola",state:"FL",avail:78,minDown:10,rate:9.9,maxTerm:48,desc:"Build-ready lots in the Orlando-Kissimmee tourism corridor. Strong rental and residential demand with zoning flexible for residential construction."},
+  {id:5,name:"Vacant Lot — Sarasota County",address:"Sarasota County, FL",type:"land",sub:"Coastal Land",price:12000,emoji:"🌊",lot:"0.18 AC",county:"Sarasota",state:"FL",avail:65,minDown:10,rate:9.9,maxTerm:60,desc:"Sarasota County consistently ranks among the top places to live in the U.S. Coastal proximity and premium lifestyle demand make these lots exceptional long-term investments."},
+  {id:10,name:"Deerfield Beach Condo",address:"19 Newport A, Deerfield Beach, FL 33442",type:"residential",sub:"Condo",price:106000,emoji:"🏠",lot:"708 sqft",county:"Broward",state:"FL",avail:1,minDown:10,rate:7.5,maxTerm:360,beds:1,baths:1,desc:"Charming single-bedroom condo in sought-after Deerfield Beach. Quiet community with pool access, steps from great dining and minutes from the beach. Owner-financed purchase available."},
+  {id:11,name:"Dorset G Condo — Boca Raton",address:"293 Dorset G, Boca Raton, FL 33434",type:"residential",sub:"Condo",price:109000,emoji:"🏡",lot:"720 sqft",county:"Palm Beach",state:"FL",avail:1,minDown:10,rate:7.5,maxTerm:360,beds:1,baths:1,desc:"Well-maintained condo in the prestigious Century Village of Boca Raton. Active 55+ gated community with resort-style amenities, pools, and clubs throughout."},
+  {id:12,name:"Oaks Way Condo #212",address:"3503 Oaks Way #212, Pompano Beach, FL 33069",type:"residential",sub:"Condo",price:177000,emoji:"🏢",lot:"950 sqft",county:"Broward",state:"FL",avail:1,minDown:10,rate:7.5,maxTerm:360,beds:2,baths:1,desc:"Spacious 2BR condo in Pompano Beach with updated kitchen, private balcony, and community pool. Strong rental income potential in a high-demand Broward County location."},
+  {id:13,name:"Oaks Lane Condo #1008",address:"575 Oaks Lane #1008, Pompano Beach, FL 33069",type:"residential",sub:"Condo",price:265000,emoji:"🏢",lot:"1,064 sqft",county:"Broward",state:"FL",avail:1,minDown:10,rate:7.5,maxTerm:360,beds:2,baths:2,desc:"Premium 10th-floor corner unit with sweeping views. Fully renovated with quartz countertops, in-unit laundry, and private parking. Walking distance to top dining and shopping."},
+  {id:14,name:"Margate Condo #107",address:"1402 NW 80 Ave #107, Margate, FL 33063",type:"residential",sub:"Condo",price:265000,emoji:"🏠",lot:"1,142 sqft",county:"Broward",state:"FL",avail:1,minDown:10,rate:7.5,maxTerm:360,beds:2,baths:2,desc:"Ground-floor corner unit in Margate — one of the largest plans in the community. Direct patio access, full-size W/D, and garage parking. Minutes to highways, shopping, and beaches."},
+  {id:20,name:"Galt Ocean Condo 1406N",address:"3410 Galt Ocean Dr 1406N, Fort Lauderdale, FL 33308",type:"rental",sub:"Lease",price:2800,emoji:"🌅",lot:"1,265 sqft",county:"Broward",state:"FL",avail:1,minDown:0,rate:0,maxTerm:12,isRental:true,beds:2,baths:2,desc:"Stunning 14th-floor oceanfront unit on Fort Lauderdale's prestigious Galt Mile. Direct Atlantic views, resort-style building with pool, tennis courts, and private beach access."},
+  {id:30,name:"Land — Reddick (1.08 AC)",address:"9625 W HWY 318, Reddick, FL 32686",type:"land",sub:"Commercial Land",price:99000,emoji:"🌾",lot:"1.08 AC",county:"Marion",state:"FL",avail:1,minDown:15,rate:8.5,maxTerm:120,desc:"Prime highway-frontage commercial land in Marion County on HWY 318. High daily traffic count. Ideal for retail, storage, or agricultural commercial development."},
+  {id:31,name:"Prime Land — Tampa (1.51 AC)",address:"1 Armand Drive, Tampa, FL",type:"land",sub:"Commercial Land",price:1000000,emoji:"🏗️",lot:"1.51 AC",county:"Hillsborough",state:"FL",avail:1,minDown:20,rate:7.9,maxTerm:180,desc:"Exceptional 1.51-acre commercial parcel in Tampa's booming development corridor. Zoned for mixed-use vertical development. A generational land-banking opportunity in one of America's fastest-growing cities."},
+];
+
+const STAYS=[
+  {id:201,name:"Galt Mile Oceanfront",addr:"Fort Lauderdale, FL",tagline:"Wake up to the Atlantic every morning",desc:"Floor-to-ceiling windows on the 14th floor of this prestigious Galt Mile corner unit. Resort building with private beach, heated pool, and 24-hr concierge. The ultimate Fort Lauderdale experience.",type:"condo",beds:2,baths:2,guests:4,sqft:1265,night:189,clean:95,emoji:"🌊",rating:4.9,reviews:47,hi:"Oceanfront",amen:["Private Beach","Ocean View","Heated Pool","WiFi 1Gbps","Chef Kitchen","Valet Parking","W/D In-Unit","Concierge","Gym","AC"]},
+  {id:202,name:"Pompano Beach Retreat",addr:"Pompano Beach, FL",tagline:"Modern coastal living steps from the sand",desc:"Freshly renovated condo with designer furnishings and a fully stocked kitchen. Community pool and fitness center, quiet tree-lined surroundings with easy beach access.",type:"condo",beds:2,baths:1,guests:3,sqft:1064,night:129,clean:75,emoji:"🏖️",rating:4.7,reviews:23,hi:"Beach Access",amen:["Heated Pool","High-Speed WiFi","Full Kitchen","Parking","AC","Gym","Private Balcony"]},
+  {id:203,name:"Bella Vista Villa — Boca",addr:"Boca Raton, FL",tagline:"Gated elegance in the heart of Boca Raton",desc:"Sophisticated villa in an exclusive gated community. Lush tropical landscaping, resort pool access, tennis courts, and two-car garage. Minutes from Town Center and pristine Atlantic beaches.",type:"villa",beds:2,baths:2,guests:4,sqft:908,night:219,clean:110,emoji:"🌺",rating:4.8,reviews:31,hi:"Gated Villa",amen:["Private Pool","Tennis","WiFi","Gourmet Kitchen","2-Car Garage","W/D","AC","Gated Entry","Outdoor Dining"]},
+  {id:204,name:"Juno Beach Oceanfront #503",addr:"Juno Beach, FL",tagline:"Panoramic Atlantic views, pristine private shores",desc:"Premium 5th-floor oceanfront residence on award-winning Juno Beach. Designer furnishings, chef's kitchen, and panoramic wrap balcony. Steps to pristine, uncrowded beaches.",type:"condo",beds:3,baths:2,guests:6,sqft:1828,night:299,clean:150,emoji:"🏝️",rating:4.95,reviews:62,hi:"Oceanfront",amen:["Oceanfront","Private Beach","Resort Pool","Fiber WiFi","Chef Kitchen","Valet","W/D","Wrap Balcony","Spa Access","EV Charging"]},
+  {id:205,name:"Highland Circle Estate",addr:"Boca Raton, FL",tagline:"Spacious family home in quiet West Boca",desc:"Generously proportioned 4-bed/2-bath single-family home in peaceful West Boca. Private pool, screened patio, updated chef's kitchen, and manicured backyard. Perfect for families and extended stays.",type:"house",beds:4,baths:2,guests:8,sqft:2200,night:259,clean:130,emoji:"🏡",rating:4.6,reviews:18,hi:"Private Pool",amen:["Private Pool","Fenced Yard","WiFi","Chef Kitchen","3-Car Garage","W/D","AC","BBQ Grill","Pet Friendly"]},
+  {id:206,name:"Margate Garden Condo",addr:"Margate, FL",tagline:"Comfortable Florida living near everything",desc:"Well-appointed ground-floor condo with private garden patio. Close to Everglades, 20 min to beach. Ideal for extended stays with full kitchen, community pool, and easy highway access.",type:"condo",beds:2,baths:2,guests:4,sqft:1142,night:99,clean:60,emoji:"🌿",rating:4.5,reviews:14,hi:"Best Value",amen:["Community Pool","WiFi","Full Kitchen","Parking","AC","Laundry","Private Patio"]},
+  {id:207,name:"Cartagena Drive Estate",addr:"Boca Raton, FL",tagline:"Ultra-luxury 5-acre private sanctuary",desc:"The pinnacle of South Florida luxury — a private 5-acre estate in West Boca's most exclusive enclave. Private lake, infinity pool, outdoor chef's kitchen, 6-car motor court, and private theater. Absolute privacy for the most discerning.",type:"estate",beds:6,baths:5,guests:12,sqft:7500,night:899,clean:350,emoji:"👑",rating:5.0,reviews:8,hi:"Ultra Luxury",amen:["5-Acre Estate","Infinity Pool","Private Lake","Fiber WiFi","Chef Kitchen","6-Car Garage","Theater Room","W/D","Outdoor Kitchen","Fire Pit","Spa","Tennis"]},
+  {id:208,name:"Panama City Beach Cottage",addr:"Panama City, FL",tagline:"Charming Gulf Coast retreat near the water",desc:"Sun-soaked cottage near the emerald Gulf waters of Panama City Beach. Private yard, updated interiors, and minutes to sugar-sand beaches. Ideal for a relaxed Florida Panhandle escape.",type:"house",beds:2,baths:1,guests:4,sqft:950,night:109,clean:65,emoji:"🐚",rating:4.4,reviews:9,hi:"Gulf Coast",amen:["WiFi","Full Kitchen","Parking","AC","Private Yard","Pet Friendly","BBQ"]},
+];
+
+const fmt=n=>n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1e3?`$${(n/1e3).toFixed(0)}K`:`$${n.toLocaleString()}`;
+const fmtF=n=>`$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+const fmtM=n=>`$${Math.round(n).toLocaleString()}/mo`;
+const calcPmt=(principal,rate,months)=>{
+  if(!rate)return principal/months;
+  const r=rate/100/12;
+  return principal*(r*Math.pow(1+r,months))/(Math.pow(1+r,months)-1);
+};
+
+/* ── APP ── */
+function App(){
+  const[page,setPage]=useState("home");
+  const[selP,setSelP]=useState(null);
+  const[selS,setSelS]=useState(null);
+  const[bookParams,setBookParams]=useState(null);
+  const[buyer,setBuyer]=useState(null);
+  const[purchases,setPurchases]=useState([]);
+  const[bookings,setBookings]=useState([]);
+  const go=p=>{setPage(p);window.scrollTo(0,0);};
+
+  return(
+    <div style={{minHeight:"100vh"}}>
+      <Nav page={page} go={go} buyer={buyer} cnt={purchases.length+bookings.length}/>
+      {page==="home"&&<Home go={go}/>}
+      {page==="buy"&&<Browse onSel={p=>{setSelP(p);go("property");}}/>}
+      {page==="property"&&selP&&<PropDetail p={selP} onBack={()=>go("buy")} onCheckout={()=>go("checkout")}/>}
+      {page==="checkout"&&selP&&<Checkout p={selP} onComplete={d=>{setPurchases(prev=>[...prev,{...d,id:Date.now(),property:selP}]);if(!buyer)setBuyer({name:d.name,email:d.email});go("dashboard");}} onBack={()=>go("property")}/>}
+      {page==="stays"&&<StaysBrowse onSel={s=>{setSelS(s);go("stay_detail");}}/>}
+      {page==="stay_detail"&&selS&&<StayDetail s={selS} onBack={()=>go("stays")} onBook={(ci,co,gc,nights,tot)=>{setBookParams({ci,co,gc,nights,tot});go("stay_book");}}/>}
+      {page==="stay_book"&&selS&&<StayBook s={selS} bp={bookParams} onComplete={d=>{setBookings(prev=>[...prev,{...d,id:Date.now(),stay:selS}]);if(!buyer)setBuyer({name:d.name,email:d.email});go("dashboard");}} onBack={()=>go("stay_detail")}/>}
+      {page==="dashboard"&&<Dashboard purchases={purchases} bookings={bookings} buyer={buyer} go={go}/>}
+    </div>
+  );
+}
+
+/* ── NAV ── */
+function Nav({page,go,buyer,cnt}){
+  const[sc,setSc]=useState(false);
+  useEffect(()=>{const h=()=>setSc(window.scrollY>40);window.addEventListener('scroll',h);return()=>window.removeEventListener('scroll',h);},[]);
+  const onHome=page==='home';
+  return(
+    <header style={{position:'fixed',top:0,left:0,right:0,zIndex:100,background:sc||!onHome?'rgba(12,11,9,.97)':'transparent',backdropFilter:'blur(24px)',borderBottom:sc||!onHome?'1px solid rgba(201,169,110,.1)':'1px solid transparent',transition:'all .4s'}}>
+      <div style={{maxWidth:1280,margin:'0 auto',padding:'0 32px',height:66,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <div onClick={()=>go('home')} style={{cursor:'pointer',display:'flex',alignItems:'center',gap:13}}>
+          <div style={{width:36,height:36,borderRadius:3,background:'linear-gradient(135deg,#C9A96E,#E8C98A)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'JetBrains Mono'",fontWeight:700,fontSize:10,color:INK,letterSpacing:'-.01em'}}>MAQ</div>
+          <div>
+            <div style={{fontFamily:"'Libre Baskerville'",fontSize:15,color:'var(--cream)',letterSpacing:'-.01em',lineHeight:1.1}}>MAQ Group</div>
+            <div style={{fontSize:9,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.18em',fontWeight:500}}>Premier Real Estate</div>
+          </div>
+        </div>
+        <nav style={{display:'flex',alignItems:'center',gap:2}}>
+          {[{k:'home',l:'Home'},{k:'buy',l:'Buy / Invest'},{k:'stays',l:'MAQ Stays'},{k:'dashboard',l:'My Account'}].map(n=>(
+            <button key={n.k} onClick={()=>go(n.k)} style={{padding:'9px 18px',border:'none',borderRadius:2,cursor:'pointer',background:page===n.k?'rgba(201,169,110,.1)':'transparent',color:page===n.k?'var(--gold2)':'var(--warm)',fontSize:13,fontWeight:page===n.k?500:300,borderBottom:page===n.k?'1px solid var(--gold)':'1px solid transparent',transition:'all .2s',letterSpacing:'.01em'}}>
+              {n.l}{n.k==='dashboard'&&cnt>0&&<span style={{marginLeft:6,background:'var(--gold)',color:INK,fontSize:9,fontWeight:700,padding:'2px 6px',borderRadius:10}}>{cnt}</span>}
+            </button>
+          ))}
+          <div style={{width:1,height:18,background:'rgba(201,169,110,.15)',margin:'0 6px'}}/>
+          <button onClick={()=>go('stays')} className="btn-gold" style={{padding:'9px 20px',fontSize:12}}>Book a Stay →</button>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+/* ── HOME ── */
+function Home({go}){
+  return(
+    <div>
+      {/* Hero */}
+      <div style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'center',overflow:'hidden'}}>
+        <div style={{position:'absolute',inset:0}}>
+          <div style={{position:'absolute',top:'-15%',right:'-8%',width:700,height:700,borderRadius:'50%',border:'1px solid rgba(201,169,110,.05)',animation:'float 12s ease-in-out infinite'}}/>
+          <div style={{position:'absolute',top:'15%',right:'8%',width:420,height:420,borderRadius:'50%',border:'1px solid rgba(201,169,110,.04)',animation:'float 15s ease-in-out infinite',animationDelay:'-5s'}}/>
+          <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at 60% 50%,rgba(201,169,110,.07) 0%,transparent 60%)'}}/>
+          <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(201,169,110,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.025) 1px,transparent 1px)',backgroundSize:'60px 60px',maskImage:'radial-gradient(ellipse at center,black 20%,transparent 75%)'}}/>
+        </div>
+        <div style={{maxWidth:1280,margin:'0 auto',padding:'140px 32px 100px',position:'relative',zIndex:1,width:'100%'}}>
+          <div style={{display:'grid',gridTemplateColumns:'1.15fr 1fr',gap:80,alignItems:'center'}}>
+            <div>
+              <div className="fa" style={{display:'inline-flex',alignItems:'center',gap:10,marginBottom:28,padding:'8px 16px',background:'rgba(201,169,110,.08)',border:'1px solid rgba(201,169,110,.18)',borderRadius:2}}>
+                <div style={{width:6,height:6,background:'var(--gold)',borderRadius:'50%',animation:'pulseGold 2s infinite'}}/>
+                <span style={{fontSize:11,color:'var(--gold2)',textTransform:'uppercase',letterSpacing:'.12em',fontWeight:500}}>Florida & California — Owner Financed</span>
+              </div>
+              <h1 className="fa fa1" style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(44px,5.5vw,72px)',fontWeight:400,lineHeight:1.06,letterSpacing:'-.02em',color:'var(--cream)',marginBottom:24}}>
+                Real Estate<br/><em style={{color:'var(--gold2)',fontStyle:'italic'}}>Reimagined</em><br/>for Every Investor
+              </h1>
+              <p className="fa fa2" style={{fontSize:17,color:'var(--warm)',lineHeight:1.72,maxWidth:490,marginBottom:40,fontWeight:300}}>
+                Vacant land from $500 down. Luxury oceanfront estates. Owner-financed homes. 
+                MAQ Group makes Florida property ownership accessible and rewarding.
+              </p>
+              <div className="fa fa3" style={{display:'flex',gap:12,marginBottom:56,flexWrap:'wrap'}}>
+                <button className="btn-gold" onClick={()=>go('buy')}>Browse Properties →</button>
+                <button className="btn-ghost" onClick={()=>go('stays')}>Explore MAQ Stays</button>
+              </div>
+              <div className="fa fa4" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:24,maxWidth:500}}>
+                {[{n:'1,300+',l:'Lots Available'},{n:'$2B+',l:'Portfolio'},{n:'15+',l:'Years Active'},{n:'98%',l:'Satisfaction'}].map((s,i)=>(
+                  <div key={i}>
+                    <div style={{fontFamily:"'Libre Baskerville'",fontSize:26,color:'var(--gold2)',lineHeight:1}}>{s.n}</div>
+                    <div style={{fontSize:10,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginTop:5}}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Cards */}
+            <div className="fa fa3" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              {[
+                {ic:'🏞️',ti:'Vacant Land',ds:'1,300+ lots from $3,500',tg:'From $500 Down',tc:'tgn',pg:'buy'},
+                {ic:'🏠',ti:'Residential',ds:'Move-in ready condos & homes',tg:'Owner Financed',tc:'tg',pg:'buy'},
+                {ic:'🏗️',ti:'Commercial',ds:'Prime FL commercial parcels',tg:'Investment Grade',tc:'tgb',pg:'buy'},
+                {ic:'🌊',ti:'MAQ Stays',ds:'8 luxury short-term rentals',tg:'Book Tonight',tc:'tgw',pg:'stays'},
+              ].map((c,i)=>(
+                <div key={i} onClick={()=>go(c.pg)} style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.1)',borderRadius:4,padding:24,cursor:'pointer',transition:'all .3s'}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.35)';e.currentTarget.style.background='var(--ink3)';e.currentTarget.style.transform='translateY(-3px)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.1)';e.currentTarget.style.background='var(--ink2)';e.currentTarget.style.transform='translateY(0)';}}>
+                  <div style={{fontSize:32,marginBottom:12}}>{c.ic}</div>
+                  <div style={{fontFamily:"'Libre Baskerville'",fontSize:17,color:'var(--cream)',marginBottom:6}}>{c.ti}</div>
+                  <div style={{fontSize:12,color:'var(--warm2)',marginBottom:14}}>{c.ds}</div>
+                  <span className={`tag ${c.tc}`}>{c.tg}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── FEATURED PROPERTIES ── */}
+      <div style={{background:'var(--ink)',borderTop:'1px solid rgba(201,169,110,.07)',padding:'88px 32px'}}>
+        <div style={{maxWidth:1280,margin:'0 auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:48,flexWrap:'wrap',gap:16}}>
+            <div>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:10,fontWeight:500}}>✦ MAQ Signature Properties</div>
+              <h2 style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(28px,3.5vw,44px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.02em',marginBottom:10}}>Featured <em style={{fontStyle:'italic',color:'var(--gold2)'}}>Developments</em></h2>
+              <p style={{fontSize:14,color:'var(--warm)',maxWidth:480,lineHeight:1.7}}>Two landmark MAQ Group projects — each with its own dedicated experience. Click to explore the full community site.</p>
+            </div>
+            <div style={{display:'flex',gap:8}}>
+              <span style={{background:'rgba(201,169,110,.07)',border:'1px solid rgba(201,169,110,.15)',borderRadius:4,padding:'6px 14px',fontSize:11,color:'var(--gold)',fontWeight:600,letterSpacing:'.06em'}}>FLAGSHIP PROJECTS</span>
+            </div>
+          </div>
+
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
+
+            {/* ── INDIAN LAKE ESTATES ── */}
+            <div className="fa fa0"
+              style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.12)',borderRadius:8,overflow:'hidden',cursor:'pointer',transition:'all .35s',position:'relative'}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.4)';e.currentTarget.style.transform='translateY(-5px)';e.currentTarget.style.boxShadow='0 24px 64px rgba(0,0,0,.5)';}}
+              onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.12)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='none';}}
+              onClick={()=>window.open('indian-lake-estates.html','_blank')}>
+              {/* Hero visual */}
+              <div style={{height:280,background:'linear-gradient(160deg,#0F2E4A 0%,#1A4A6E 40%,#2B6CB0 70%,#276749 100%)',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
+                {/* Grid lines */}
+                <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(43,108,176,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(43,108,176,.06) 1px,transparent 1px)',backgroundSize:'48px 48px'}}/>
+                {/* Glow */}
+                <div style={{position:'absolute',width:400,height:400,borderRadius:'50%',background:'radial-gradient(circle,rgba(43,108,176,.2) 0%,transparent 70%)',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}/>
+                <div style={{textAlign:'center',position:'relative',zIndex:1}}>
+                  <div style={{fontSize:72,marginBottom:8,filter:'drop-shadow(0 8px 24px rgba(0,0,0,.4))'}}>🏞️</div>
+                  <div style={{fontFamily:"'Libre Baskerville'",fontSize:26,color:'#fff',fontWeight:400,letterSpacing:'-.01em',textShadow:'0 2px 12px rgba(0,0,0,.4)'}}>Indian Lake Estates</div>
+                  <div style={{fontSize:12,color:'rgba(255,255,255,.55)',marginTop:6,letterSpacing:'.06em'}}>LAKE WALK-IN-WATER · POLK COUNTY, FL</div>
+                </div>
+                {/* Badges */}
+                <div style={{position:'absolute',top:16,left:16,display:'flex',flexDirection:'column',gap:6}}>
+                  <span style={{background:'rgba(196,152,42,.9)',color:'#fff',fontSize:9,fontWeight:700,padding:'4px 10px',borderRadius:4,letterSpacing:'.08em'}}>MAQ MANAGED</span>
+                  <span style={{background:'rgba(39,103,73,.85)',color:'#fff',fontSize:9,fontWeight:700,padding:'4px 10px',borderRadius:4,letterSpacing:'.08em'}}>494+ LOTS</span>
+                </div>
+                <div style={{position:'absolute',top:16,right:16,background:'rgba(255,255,255,.08)',border:'1px solid rgba(255,255,255,.15)',borderRadius:6,padding:'6px 12px',fontSize:11,color:'rgba(255,255,255,.7)',backdropFilter:'blur(8px)'}}>
+                  Explore Site ↗
+                </div>
+                {/* Bottom fade */}
+                <div style={{position:'absolute',bottom:0,left:0,right:0,height:60,background:'linear-gradient(transparent,var(--ink2))'}}/>
+              </div>
+
+              {/* Body */}
+              <div style={{padding:'26px 28px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:14}}>
+                  <div>
+                    <div style={{fontFamily:"'Libre Baskerville'",fontSize:22,color:'var(--cream)',marginBottom:4}}>Indian Lake Estates</div>
+                    <div style={{fontSize:12,color:'var(--warm2)',display:'flex',alignItems:'center',gap:5}}>📍 Polk County, FL · Unincorporated Community</div>
+                  </div>
+                  <div style={{textAlign:'right'}}>
+                    <div style={{fontFamily:"'Libre Baskerville'",fontSize:22,color:'var(--gold2)'}}>From $5K</div>
+                    <div style={{fontSize:10,color:'var(--warm2)'}}>per lot · owner financing</div>
+                  </div>
+                </div>
+
+                <p style={{fontSize:13.5,color:'var(--warm)',lineHeight:1.7,marginBottom:20}}>
+                  A serene 7,200-acre lakeside community on the shores of Lake Walk-in-Water — Florida's premier bass fishing lake. Half-acre lots, no HOA, no CDD fees. Featuring golf, fishing, tennis, pool, gym, interfaith church, and mosque.
+                </p>
+
+                {/* Amenity chips */}
+                <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:22}}>
+                  {['⛳ Golf','🎣 Fishing','🏊 Pool','🎾 Tennis','🏋️ Gym','⛪ Church','🕌 Mosque','⛵ Marina','🌅 Pier'].map(a=>(
+                    <span key={a} style={{background:'rgba(43,108,176,.1)',border:'1px solid rgba(43,108,176,.2)',color:'#7AAEFF',fontSize:10,fontWeight:600,padding:'3px 9px',borderRadius:4,letterSpacing:'.04em'}}>{a}</span>
+                  ))}
+                </div>
+
+                {/* Stats row */}
+                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:1,background:'rgba(201,169,110,.08)',borderRadius:6,overflow:'hidden',marginBottom:22}}>
+                  {[{n:'7,200',l:'Acres'},{n:'494+',l:'MAQ Lots'},{n:'7,500ac',l:'Lake Size'},{n:'$0',l:'HOA Fee'}].map(s=>(
+                    <div key={s.l} style={{background:'var(--ink3)',padding:'12px 8px',textAlign:'center'}}>
+                      <div style={{fontFamily:"'Libre Baskerville'",fontSize:16,color:'var(--gold2)',lineHeight:1}}>{s.n}</div>
+                      <div style={{fontSize:10,color:'var(--warm2)',marginTop:3,letterSpacing:'.05em'}}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  style={{width:'100%',height:42,borderRadius:6,background:'linear-gradient(135deg,#1A4A6E,#2B6CB0)',border:'none',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',letterSpacing:'.03em',transition:'all .2s'}}
+                  onMouseEnter={e=>e.currentTarget.style.opacity='.9'}
+                  onMouseLeave={e=>e.currentTarget.style.opacity='1'}
+                  onClick={e=>{e.stopPropagation();window.open('indian-lake-estates.html','_blank');}}>
+                  View Full Community Site →
+                </button>
+              </div>
+            </div>
+
+            {/* ── US SPORTS COMPLEX ── */}
+            <div className="fa fa1"
+              style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.12)',borderRadius:8,overflow:'hidden',cursor:'pointer',transition:'all .35s',position:'relative'}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.4)';e.currentTarget.style.transform='translateY(-5px)';e.currentTarget.style.boxShadow='0 24px 64px rgba(0,0,0,.5)';}}
+              onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.12)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='none';}}
+              onClick={()=>window.open('maq-complex.html','_blank')}>
+              {/* Hero visual */}
+              <div style={{height:280,background:'linear-gradient(160deg,#0A0A0A 0%,#1A1A1A 35%,#0D2A0D 65%,#1A0D00 100%)',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
+                <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(201,169,110,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.04) 1px,transparent 1px)',backgroundSize:'48px 48px'}}/>
+                <div style={{position:'absolute',width:500,height:500,borderRadius:'50%',background:'radial-gradient(circle,rgba(201,169,110,.08) 0%,transparent 70%)',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}/>
+                <div style={{textAlign:'center',position:'relative',zIndex:1}}>
+                  <div style={{fontSize:72,marginBottom:8,filter:'drop-shadow(0 8px 24px rgba(0,0,0,.6))'}}>🏟️</div>
+                  <div style={{fontFamily:"'Libre Baskerville'",fontSize:26,color:'#fff',fontWeight:400,letterSpacing:'-.01em',textShadow:'0 2px 12px rgba(0,0,0,.5)'}}>MAQ Sports Complex</div>
+                  <div style={{fontSize:12,color:'rgba(255,255,255,.45)',marginTop:6,letterSpacing:'.06em'}}>FAYETTEVILLE, NORTH CAROLINA</div>
+                </div>
+                <div style={{position:'absolute',top:16,left:16,display:'flex',flexDirection:'column',gap:6}}>
+                  <span style={{background:'rgba(201,169,110,.9)',color:'#000',fontSize:9,fontWeight:700,padding:'4px 10px',borderRadius:4,letterSpacing:'.08em'}}>LUXURY RESIDENCES</span>
+                  <span style={{background:'rgba(20,80,20,.85)',color:'#fff',fontSize:9,fontWeight:700,padding:'4px 10px',borderRadius:4,letterSpacing:'.08em'}}>SPORTS COMPLEX</span>
+                </div>
+                <div style={{position:'absolute',top:16,right:16,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.12)',borderRadius:6,padding:'6px 12px',fontSize:11,color:'rgba(255,255,255,.6)',backdropFilter:'blur(8px)'}}>
+                  Explore Site ↗
+                </div>
+                <div style={{position:'absolute',bottom:0,left:0,right:0,height:60,background:'linear-gradient(transparent,var(--ink2))'}}/>
+              </div>
+
+              {/* Body */}
+              <div style={{padding:'26px 28px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:14}}>
+                  <div>
+                    <div style={{fontFamily:"'Libre Baskerville'",fontSize:22,color:'var(--cream)',marginBottom:4}}>MAQ Sports Complex</div>
+                    <div style={{fontSize:12,color:'var(--warm2)',display:'flex',alignItems:'center',gap:5}}>📍 Fayetteville, NC · Cumberland County</div>
+                  </div>
+                  <div style={{textAlign:'right'}}>
+                    <div style={{fontFamily:"'Libre Baskerville'",fontSize:22,color:'var(--gold2)'}}>From $1,450</div>
+                    <div style={{fontSize:10,color:'var(--warm2)'}}>per month · 280+ units</div>
+                  </div>
+                </div>
+
+                <p style={{fontSize:13.5,color:'var(--warm)',lineHeight:1.7,marginBottom:20}}>
+                  A first-class mixed-use development spanning 12+ acres in Fayetteville. 280+ luxury apartment units paired with ICC-compliant cricket grounds and FIFA-standard soccer fields — adjacent to Fort Liberty.
+                </p>
+
+                {/* Amenity chips */}
+                <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:22}}>
+                  {['🏏 Cricket ICC','⚽ FIFA Soccer','🏋️ Fitness Club','🏊 Pool','🎯 24/7 Concierge','🍽️ Rooftop Dining','🚗 Valet','🔒 Secure'].map(a=>(
+                    <span key={a} style={{background:'rgba(201,169,110,.07)',border:'1px solid rgba(201,169,110,.15)',color:'var(--gold)',fontSize:10,fontWeight:600,padding:'3px 9px',borderRadius:4,letterSpacing:'.04em'}}>{a}</span>
+                  ))}
+                </div>
+
+                {/* Stats row */}
+                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:1,background:'rgba(201,169,110,.08)',borderRadius:6,overflow:'hidden',marginBottom:22}}>
+                  {[{n:'280+',l:'Units'},{n:'12+',l:'Acres'},{n:'3',l:'Sport Venues'},{n:'24/7',l:'Concierge'}].map(s=>(
+                    <div key={s.l} style={{background:'var(--ink3)',padding:'12px 8px',textAlign:'center'}}>
+                      <div style={{fontFamily:"'Libre Baskerville'",fontSize:16,color:'var(--gold2)',lineHeight:1}}>{s.n}</div>
+                      <div style={{fontSize:10,color:'var(--warm2)',marginTop:3,letterSpacing:'.05em'}}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  style={{width:'100%',height:42,borderRadius:6,background:'linear-gradient(135deg,#1A1A1A,#3A3A3A)',border:'1px solid rgba(201,169,110,.25)',color:'var(--gold)',fontSize:13,fontWeight:600,cursor:'pointer',letterSpacing:'.03em',transition:'all .2s'}}
+                  onMouseEnter={e=>{e.currentTarget.style.background='linear-gradient(135deg,var(--gold3),var(--gold))';e.currentTarget.style.color='#000';e.currentTarget.style.borderColor='transparent';}}
+                  onMouseLeave={e=>{e.currentTarget.style.background='linear-gradient(135deg,#1A1A1A,#3A3A3A)';e.currentTarget.style.color='var(--gold)';e.currentTarget.style.borderColor='rgba(201,169,110,.25)';}}
+                  onClick={e=>{e.stopPropagation();window.open('maq-complex.html','_blank');}}>
+                  View Full Complex Site →
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom CTA strip */}
+          <div style={{marginTop:24,background:'rgba(201,169,110,.04)',border:'1px solid rgba(201,169,110,.1)',borderRadius:6,padding:'18px 24px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12}}>
+            <div style={{fontSize:13,color:'var(--warm)'}}>
+              <span style={{color:'var(--gold)',fontWeight:600}}>More developments coming.</span> &nbsp;MAQ Group is actively expanding — sports venues, residential communities, and mixed-use developments nationwide.
+            </div>
+            <button onClick={()=>go('buy')} style={{background:'none',border:'1px solid rgba(201,169,110,.25)',borderRadius:4,color:'var(--gold)',fontSize:12,fontWeight:600,padding:'8px 18px',cursor:'pointer',whiteSpace:'nowrap',transition:'all .2s',letterSpacing:'.04em'}}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(201,169,110,.08)';}}
+              onMouseLeave={e=>{e.currentTarget.style.background='none';}}>
+              Browse Full Portfolio →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Stays */}
+      <div style={{background:'var(--ink2)',borderTop:'1px solid rgba(201,169,110,.07)',padding:'80px 32px'}}>
+        <div style={{maxWidth:1280,margin:'0 auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:40}}>
+            <div>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:10,fontWeight:500}}>✦ MAQ Stays</div>
+              <h2 style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(28px,3.5vw,44px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.02em'}}>Hand-Picked <em style={{fontStyle:'italic',color:'var(--gold2)'}}>Luxury Stays</em></h2>
+            </div>
+            <button onClick={()=>go('stays')} style={{background:'none',border:'none',color:'var(--gold)',cursor:'pointer',fontSize:13,fontWeight:500,display:'flex',alignItems:'center',gap:6,transition:'gap .2s'}}
+              onMouseEnter={e=>e.currentTarget.style.gap='12px'} onMouseLeave={e=>e.currentTarget.style.gap='6px'}>View all stays →</button>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(270px,1fr))',gap:18}}>
+            {STAYS.slice(0,4).map((s,i)=>(
+              <div key={s.id} className={`fa fa${i}`} onClick={()=>go('stays')} style={{background:'var(--ink3)',border:'1px solid rgba(201,169,110,.1)',borderRadius:4,overflow:'hidden',cursor:'pointer',transition:'all .3s'}}
+                onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.3)';e.currentTarget.style.transform='translateY(-4px)';}}
+                onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.1)';e.currentTarget.style.transform='translateY(0)';}}>
+                <div style={{height:160,background:'linear-gradient(135deg,var(--ink2),var(--ink3))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:54,position:'relative'}}>
+                  {s.emoji}<div style={{position:'absolute',top:12,left:12}}><span className="tag tg">{s.hi}</span></div>
+                  <div style={{position:'absolute',bottom:0,left:0,right:0,height:40,background:'linear-gradient(transparent,var(--ink3))'}}/>
+                </div>
+                <div style={{padding:'18px 20px'}}>
+                  <div style={{fontFamily:"'Libre Baskerville'",fontSize:16,color:'var(--cream)',marginBottom:4}}>{s.name}</div>
+                  <div style={{fontSize:12,color:'var(--warm2)',marginBottom:10}}>{s.addr}</div>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                    <div><span style={{fontFamily:"'Libre Baskerville'",fontSize:20,color:'var(--gold2)'}}>${s.night}</span><span style={{fontSize:11,color:'var(--warm2)'}}>/night</span></div>
+                    <div style={{fontSize:11,color:'var(--gold)',fontWeight:500}}>★ {s.rating} ({s.reviews})</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Why MAQ */}
+      <div style={{padding:'80px 32px',maxWidth:1280,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:52}}>
+          <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:10,fontWeight:500}}>Why MAQ Group</div>
+          <h2 style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(28px,3.5vw,44px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.02em'}}>The Smarter Way to <em style={{fontStyle:'italic',color:'var(--gold2)'}}>Own Property</em></h2>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
+          {[
+            {ic:'🔑',ti:'No Bank Required',ds:"Owner financing available on most properties. No credit checks, no bank approval, no waiting. Just your down payment and you're in."},
+            {ic:'📋',ti:'Flexible Terms',ds:'Choose your own down payment and loan term. Land from 10% down over 4 years. Homes from 10% down over 30 years.'},
+            {ic:'📍',ti:'Prime Growth Markets',ds:"Every property is in high-growth Florida or California — positioned for long-term appreciation and strong rental demand."},
+          ].map((f,i)=>(
+            <div key={i} style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.08)',borderRadius:4,padding:'36px 30px'}}>
+              <div style={{fontSize:36,marginBottom:20}}>{f.ic}</div>
+              <div style={{fontFamily:"'Libre Baskerville'",fontSize:19,color:'var(--cream)',marginBottom:12}}>{f.ti}</div>
+              <div style={{fontSize:14,color:'var(--warm)',lineHeight:1.75}}>{f.ds}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Footer go={go}/>
+    </div>
+  );
+}
+
+/* ── BROWSE ── */
+function Browse({onSel}){
+  const[filter,setFilter]=useState("all");
+  const[sort,setSort]=useState("price_asc");
+  const[search,setSearch]=useState("");
+  const TYPES=[{k:"all",l:"All Properties"},{k:"land",l:"Vacant Land"},{k:"residential",l:"Residential"},{k:"rental",l:"For Lease"},{k:"commercial",l:"Commercial"}];
+  const list=useMemo(()=>{
+    let r=PROPS.filter(p=>(filter==="all"||p.type===filter)&&(!search||[p.name,p.address,p.county].some(x=>x.toLowerCase().includes(search.toLowerCase()))));
+    return sort==="price_asc"?r.sort((a,b)=>a.price-b.price):r.sort((a,b)=>b.price-a.price);
+  },[filter,sort,search]);
+
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      <div style={{background:'var(--ink2)',borderBottom:'1px solid rgba(201,169,110,.07)',padding:'52px 32px 36px'}}>
+        <div style={{maxWidth:1280,margin:'0 auto'}}>
+          <div className="fa" style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:12,fontWeight:500}}>MAQ Group Portfolio</div>
+          <h1 className="fa fa1" style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(30px,4vw,50px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.02em',marginBottom:10}}>Properties <em style={{fontStyle:'italic',color:'var(--gold2)'}}>For Sale</em></h1>
+          <p className="fa fa2" style={{fontSize:15,color:'var(--warm)',maxWidth:500,marginBottom:28,lineHeight:1.65}}>Owner-financed properties across Florida and California. Start with as little as $500 down — no bank needed.</p>
+          <div className="fa fa3" style={{position:'relative',maxWidth:420,marginBottom:24}}>
+            <span style={{position:'absolute',left:16,top:'50%',transform:'translateY(-50%)',fontSize:13,color:'var(--warm2)'}}>🔍</span>
+            <input className="inp" style={{paddingLeft:42}} placeholder="Search by name, city, or county…" value={search} onChange={e=>setSearch(e.target.value)}/>
+          </div>
+          <div className="fa fa4" style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12}}>
+            <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+              {TYPES.map(t=>(
+                <button key={t.k} onClick={()=>setFilter(t.k)} style={{padding:'8px 16px',borderRadius:2,border:'1px solid',cursor:'pointer',borderColor:filter===t.k?'var(--gold)':'rgba(201,169,110,.15)',background:filter===t.k?'rgba(201,169,110,.1)':'transparent',color:filter===t.k?'var(--gold2)':'var(--warm)',fontSize:12,fontWeight:filter===t.k?500:300,transition:'all .2s'}}>
+                  {t.l}
+                </button>
+              ))}
+            </div>
+            <div style={{display:'flex',alignItems:'center',gap:12}}>
+              <span style={{fontSize:12,color:'var(--warm2)'}}>{list.length} results</span>
+              <select value={sort} onChange={e=>setSort(e.target.value)} style={{padding:'9px 14px',borderRadius:2,border:'1px solid rgba(201,169,110,.15)',background:'var(--ink3)',color:'var(--warm)',fontSize:12,cursor:'pointer',outline:'none'}}>
+                <option value="price_asc">Price: Low → High</option>
+                <option value="price_desc">Price: High → Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style={{maxWidth:1280,margin:'0 auto',padding:'32px 32px 80px'}}>
+        {list.length===0?(
+          <div style={{textAlign:'center',padding:'80px 0',color:'var(--warm2)'}}>
+            <div style={{fontSize:48,marginBottom:16}}>🔍</div>
+            <div style={{fontFamily:"'Libre Baskerville'",fontSize:22,color:'var(--warm)'}}>No properties found</div>
+            <div style={{fontSize:13,marginTop:8}}>Try adjusting your search or filter</div>
+          </div>
+        ):(
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))',gap:20}}>
+            {list.map((p,i)=><PropCard key={p.id} p={p} onClick={()=>onSel(p)} delay={Math.min(i,5)}/>)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PropCard({p,onClick,delay}){
+  const[hov,setHov]=useState(false);
+  const mo=p.isRental?p.price:calcPmt(p.price*(1-p.minDown/100),p.rate,p.maxTerm);
+  return(
+    <div className={`fa fa${delay}`} onClick={onClick} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
+      style={{background:hov?'var(--ink3)':'var(--ink2)',border:`1px solid ${hov?'rgba(201,169,110,.3)':'rgba(201,169,110,.1)'}`,borderRadius:4,cursor:'pointer',transition:'all .3s',transform:hov?'translateY(-4px)':'none',overflow:'hidden',boxShadow:hov?'0 20px 50px rgba(0,0,0,.4)':'none'}}>
+      <div style={{height:155,background:'linear-gradient(135deg,#141310,#1E1C18)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:50,position:'relative'}}>
+        {p.emoji}
+        {p.avail>1&&<div style={{position:'absolute',top:12,right:12}}><span className="tag tgn">{p.avail} lots</span></div>}
+        {p.isRental&&<div style={{position:'absolute',top:12,left:12}}><span className="tag tgb">For Lease</span></div>}
+        {!p.isRental&&p.avail===1&&p.type==='land'&&<div style={{position:'absolute',top:12,left:12}}><span className="tag tg">Last Parcel</span></div>}
+        <div style={{position:'absolute',bottom:0,left:0,right:0,height:48,background:`linear-gradient(transparent,${hov?'#1E1C18':'#141310'})`}}/>
+      </div>
+      <div style={{padding:'20px 22px 24px'}}>
+        <div style={{display:'flex',justifyContent:'space-between',gap:8,marginBottom:4,alignItems:'flex-start'}}>
+          <div style={{fontFamily:"'Libre Baskerville'",fontSize:17,color:'var(--cream)',lineHeight:1.3}}>{p.name}</div>
+          <span className={`tag ${p.type==='land'?'tgw':p.type==='rental'?'tgb':'tg'}`} style={{flexShrink:0,marginTop:2}}>{p.sub}</span>
+        </div>
+        <div style={{fontSize:12,color:'var(--warm2)',marginBottom:14,display:'flex',alignItems:'center',gap:4}}>📍 {p.address}</div>
+        <div className="divr" style={{marginBottom:14}}/>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end'}}>
+          <div>
+            <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>{p.isRental?'Monthly Rent':'List Price'}</div>
+            <div style={{fontFamily:"'Libre Baskerville'",fontSize:24,color:'var(--gold2)'}}>{p.isRental?`${fmt(p.price)}/mo`:fmt(p.price)}</div>
+          </div>
+          {!p.isRental&&(
+            <div style={{textAlign:'right'}}>
+              <div style={{fontSize:9,color:'#7DC89A',textTransform:'uppercase',letterSpacing:'.06em',marginBottom:2}}>As low as</div>
+              <div style={{fontFamily:"'JetBrains Mono'",fontSize:14,color:'#7DC89A',fontWeight:500}}>{fmtM(mo)}</div>
+              <div style={{fontSize:10,color:'var(--warm2)',marginTop:2}}>{p.lot}</div>
+            </div>
+          )}
+        </div>
+        {!p.isRental&&(
+          <div style={{marginTop:12,padding:'9px 13px',background:'rgba(201,169,110,.05)',border:'1px solid rgba(201,169,110,.1)',borderRadius:2,fontSize:11,color:'var(--gold)',display:'flex',alignItems:'center',gap:5}}>
+            ↓ {p.minDown}% down · {fmtF(p.price*p.minDown/100)} to start
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── PROPERTY DETAIL (Zillow-quality) ── */
+function PropDetail({p,onBack,onCheckout}){
+  const[dp,setDp]=useState(p.minDown);
+  const[term,setTerm]=useState(p.isRental?12:Math.min(p.maxTerm,p.price<50000?48:120));
+  const[saved,setSaved]=useState(false);
+  const[showPhotoModal,setShowPhotoModal]=useState(false);
+  const da=p.price*dp/100;
+  const fi=p.price-da;
+  const mo=p.isRental?p.price:calcPmt(fi,p.rate,term);
+  const tot=p.isRental?p.price*term:da+mo*term;
+  const int=p.isRental?0:tot-p.price;
+  const terms=[];
+  if(!p.isRental){for(let t=12;t<=p.maxTerm;t+=(t<60?12:60))terms.push(t);if(!terms.includes(p.maxTerm))terms.push(p.maxTerm);}
+  else[6,12,24].forEach(t=>terms.push(t));
+
+  // Property type-specific gradients
+  const bgMap={land:'linear-gradient(155deg,#0A1A0A,#142814,#0A1208)',residential:'linear-gradient(155deg,#14100A,#241C10,#181410)',commercial:'linear-gradient(155deg,#0A0E1A,#101828,#0E141A)',rental:'linear-gradient(155deg,#0A0E1A,#101428,#060A14)'};
+  const bg=bgMap[p.type]||bgMap.land;
+
+  // Neighborhood data
+  const neighborhood={
+    walkScore:p.county==='Broward'||p.county==='Palm Beach'?82:54,
+    transitScore:p.county==='Broward'||p.county==='Palm Beach'?64:28,
+    bikeScore:p.county==='Broward'||p.county==='Palm Beach'?58:22,
+    schools:p.state==='FL'?'A-rated district':'Highly rated',
+    appreciation:p.type==='land'?'+12.4%':p.county==='Broward'?'+8.1%':'+6.3%',
+    medianPrice:p.type==='land'?'$4,800/lot':p.county==='Broward'?'$320K':'$180K',
+  };
+
+  const details=p.type==='land'
+    ?[{l:'Lot Size',v:p.lot},{l:'County',v:`${p.county}, ${p.state}`},{l:'Available',v:p.avail.toLocaleString()+' lots'},{l:'Zoning',v:'Residential'},{l:'Financing',v:'Owner Financed'},{l:'Rate',v:p.rate+'% APR'},{l:'HOA',v:'$0 / None'},{l:'Access',v:'Paved Road'}]
+    :p.isRental
+    ?[{l:'Size',v:p.lot},{l:'Beds',v:p.beds||'—'},{l:'Baths',v:p.baths||'—'},{l:'County',v:p.county},{l:'Lease Type',v:'Annual'},{l:'Available',v:'Now'},{l:'Pets',v:'Inquire'},{l:'Parking',v:'Included'}]
+    :[{l:'Size',v:p.lot},{l:'Beds',v:p.beds||'—'},{l:'Baths',v:p.baths||'—'},{l:'County',v:p.county},{l:'Financing',v:'Owner Financed'},{l:'Rate',v:p.rate+'% APR'},{l:'HOA',v:'$0 / None'},{l:'Style',v:p.sub}];
+
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      {/* Photo Modal */}
+      {showPhotoModal&&(
+        <div className="modal-overlay" onClick={()=>setShowPhotoModal(false)}>
+          <div style={{background:'var(--ink2)',borderRadius:12,padding:32,maxWidth:500,width:'100%',textAlign:'center'}} onClick={e=>e.stopPropagation()}>
+            <div style={{fontSize:80,marginBottom:16}}>{p.emoji}</div>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:8}}>{p.name}</div>
+            <div style={{fontSize:13,color:'var(--warm2)',marginBottom:20}}>Property photos will be available once connected to Firebase listing database.</div>
+            <button className="btn-gold" onClick={()=>setShowPhotoModal(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
+      <div style={{maxWidth:1200,margin:'0 auto',padding:'20px 32px 80px'}}>
+        {/* Breadcrumb + actions */}
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16,flexWrap:'wrap',gap:10}}>
+          <button onClick={onBack} style={{background:'none',border:'none',color:'var(--warm)',fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',gap:6,padding:0,transition:'color .2s'}}
+            onMouseEnter={e=>e.currentTarget.style.color='var(--gold)'} onMouseLeave={e=>e.currentTarget.style.color='var(--warm)'}>
+            ← Back to listings
+          </button>
+          <div style={{display:'flex',gap:8}}>
+            <button onClick={()=>setSaved(v=>!v)}
+              style={{display:'flex',alignItems:'center',gap:6,padding:'8px 14px',background:'none',border:'1px solid rgba(201,169,110,.2)',borderRadius:6,color:'var(--warm)',fontSize:12,cursor:'pointer',transition:'all .2s'}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)';}} onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.2)';e.currentTarget.style.color='var(--warm)';}}>
+              {saved?'❤️ Saved':'🤍 Save'}
+            </button>
+            <button style={{display:'flex',alignItems:'center',gap:6,padding:'8px 14px',background:'none',border:'1px solid rgba(201,169,110,.2)',borderRadius:6,color:'var(--warm)',fontSize:12,cursor:'pointer',transition:'all .2s'}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)';}} onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.2)';e.currentTarget.style.color='var(--warm)';}}>
+              ↗ Share
+            </button>
+          </div>
+        </div>
+
+        {/* Photo Grid (Zillow-style) */}
+        <div className="fa photo-grid" style={{marginBottom:28}}>
+          <div className="photo-grid-cell" style={{background:bg}} onClick={()=>setShowPhotoModal(true)}>
+            <div style={{fontSize:90,filter:'drop-shadow(0 8px 40px rgba(0,0,0,.5))'}}>{p.emoji}</div>
+            <div style={{position:'absolute',top:14,left:14,display:'flex',gap:6}}>
+              <span className={`tag ${p.type==='land'?'tgw':p.isRental?'tgb':'tg'}`}>{p.sub}</span>
+              {p.avail>1&&<span className="tag tgn">{p.avail} available</span>}
+            </div>
+          </div>
+          {[
+            {bg:'linear-gradient(155deg,#0a1520,#1a2a3a)',icon:'🌅',label:'Surroundings'},
+            {bg:'linear-gradient(155deg,#0a200a,#1a3020)',icon:'🌿',label:'Area'},
+            {bg:'linear-gradient(155deg,#201008,#3a2010)',icon:'🗺️',label:'Aerial'},
+            {bg:'linear-gradient(155deg,#150a20,#251530)',icon:'📍',label:'Map'},
+          ].map((ph,i)=>(
+            <div key={i} className="photo-grid-cell" style={{background:ph.bg}} onClick={()=>setShowPhotoModal(true)}>
+              <div style={{fontSize:30}}>{ph.icon}</div>
+              <div style={{position:'absolute',bottom:8,left:10,fontSize:10,color:'rgba(255,255,255,.4)',letterSpacing:'.05em'}}>{ph.label}</div>
+              {i===3&&<button onClick={e=>{e.stopPropagation();setShowPhotoModal(true);}} style={{position:'absolute',bottom:12,right:12,background:'rgba(255,255,255,.18)',backdropFilter:'blur(8px)',border:'1px solid rgba(255,255,255,.3)',borderRadius:6,color:'var(--cream)',fontSize:11,fontWeight:600,padding:'5px 12px',cursor:'pointer'}}>All photos</button>}
+            </div>
+          ))}
+        </div>
+
+        {/* Two-column layout */}
+        <div style={{display:'grid',gridTemplateColumns:'1.35fr 1fr',gap:40,alignItems:'start'}}>
+          <div>
+            {/* Price + title */}
+            <div className="fa" style={{marginBottom:20,paddingBottom:20,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:10}}>
+                <div>
+                  <div style={{fontFamily:"'DM Serif Display'",fontSize:'clamp(28px,3vw,38px)',color:'var(--gold2)',lineHeight:1.1,marginBottom:4}}>
+                    {p.isRental?`${fmt(p.price)}/mo`:fmt(p.price)}
+                  </div>
+                  <h1 style={{fontFamily:"'DM Serif Display'",fontSize:'clamp(20px,2.5vw,26px)',color:'var(--cream)',letterSpacing:'-.01em',marginBottom:6}}>{p.name}</h1>
+                  <div style={{fontSize:13,color:'var(--warm2)',display:'flex',alignItems:'center',gap:5}}>📍 {p.address}</div>
+                </div>
+                {!p.isRental&&(
+                  <div style={{background:'rgba(90,158,111,.08)',border:'1px solid rgba(90,158,111,.2)',borderRadius:8,padding:'12px 18px',textAlign:'center'}}>
+                    <div style={{fontSize:10,color:'#7DC89A',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>Est. payment</div>
+                    <div style={{fontFamily:"'JetBrains Mono'",fontSize:20,color:'#7DC89A',fontWeight:600}}>{fmtM(mo)}</div>
+                    <div style={{fontSize:10,color:'rgba(125,200,154,.6)',marginTop:2}}>{p.minDown}% down · {p.rate}% APR</div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Quick stats row */}
+            <div className="fa fa1" style={{display:'grid',gridTemplateColumns:`repeat(${details.slice(0,4).length},1fr)`,gap:10,marginBottom:24}}>
+              {details.slice(0,4).map((d,i)=>(
+                <div key={i} className="stat-pill">
+                  <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:4}}>{d.l}</div>
+                  <div style={{fontSize:15,fontWeight:600,color:'var(--cream)'}}>{d.v}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Description */}
+            <div className="fa fa2" style={{marginBottom:24,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:12}}>About this property</h3>
+              <p style={{fontSize:14,color:'var(--warm)',lineHeight:1.85}}>{p.desc}</p>
+            </div>
+
+            {/* Full property details */}
+            <div className="fa fa2" style={{marginBottom:24,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:14}}>Property details</h3>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:0,border:'1px solid rgba(201,169,110,.08)',borderRadius:8,overflow:'hidden'}}>
+                {details.map((d,i)=>(
+                  <div key={i} style={{padding:'12px 16px',background:i%2===0?'rgba(255,255,255,.02)':'transparent',borderBottom:i<details.length-2?'1px solid rgba(201,169,110,.06)':'none',borderRight:i%2===0?'1px solid rgba(201,169,110,.06)':'none',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                    <span style={{fontSize:12,color:'var(--warm2)'}}>{d.l}</span>
+                    <span style={{fontSize:13,color:'var(--cream)',fontWeight:500}}>{d.v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Financing terms */}
+            {!p.isRental&&(
+              <div className="fa fa3" style={{marginBottom:24,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+                <h3 style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:6}}>Owner financing available</h3>
+                <p style={{fontSize:13,color:'var(--warm)',marginBottom:14,lineHeight:1.7}}>No bank approval. No credit check. Just your down payment and you're in. Select your terms below.</p>
+                <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+                  {[{ic:'🏦',l:'No Bank Required'},{ic:'✅',l:'No Credit Check'},{ic:'📋',l:'Flexible Terms'},{ic:'🤝',l:'Simple Closing'}].map(f=>(
+                    <div key={f.l} style={{display:'flex',alignItems:'center',gap:6,padding:'7px 12px',background:'rgba(201,169,110,.05)',border:'1px solid rgba(201,169,110,.1)',borderRadius:6,fontSize:12,color:'var(--warm)'}}>
+                      <span>{f.ic}</span><span>{f.l}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Neighborhood / Walk Score */}
+            <div className="fa fa3" style={{marginBottom:24,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:14}}>Neighborhood</h3>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:16}}>
+                {[{l:'Walk Score',v:neighborhood.walkScore,color:'#7DC89A'},{l:'Transit',v:neighborhood.transitScore,color:'#6BAACC'},{l:'Bike',v:neighborhood.bikeScore,color:'var(--gold)'}].map(sc=>(
+                  <div key={sc.l} style={{background:'rgba(255,255,255,.03)',border:'1px solid rgba(255,255,255,.06)',borderRadius:8,padding:'14px',textAlign:'center'}}>
+                    <div style={{fontFamily:"'JetBrains Mono'",fontSize:28,color:sc.color,fontWeight:600,lineHeight:1}}>{sc.v}</div>
+                    <div style={{fontSize:11,color:'var(--warm2)',marginTop:4,textTransform:'uppercase',letterSpacing:'.06em'}}>{sc.l}</div>
+                    <div style={{height:3,background:'rgba(255,255,255,.06)',borderRadius:2,marginTop:8,overflow:'hidden'}}>
+                      <div style={{width:`${sc.v}%`,height:'100%',background:sc.color,borderRadius:2,transition:'width 1s .5s'}}/>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+                {[{l:'Schools',v:neighborhood.schools},{l:'1yr Appreciation',v:neighborhood.appreciation},{l:'Median Comparable',v:neighborhood.medianPrice},{l:'Market',v:'High Demand'}].map(n=>(
+                  <div key={n.l} style={{display:'flex',justifyContent:'space-between',padding:'10px 14px',background:'rgba(255,255,255,.02)',border:'1px solid rgba(201,169,110,.07)',borderRadius:6}}>
+                    <span style={{fontSize:12,color:'var(--warm2)'}}>{n.l}</span>
+                    <span style={{fontSize:12,color:n.l.includes('Appreciation')?'#7DC89A':'var(--cream)',fontWeight:500}}>{n.v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Map */}
+            <div className="fa fa4">
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:8}}>Location</h3>
+              <div style={{fontSize:13,color:'var(--warm)',marginBottom:12}}>📍 {p.address}</div>
+              <div className="map-placeholder" style={{height:200}}>
+                <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(201,169,110,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.04) 1px,transparent 1px)',backgroundSize:'32px 32px'}}/>
+                <div style={{position:'absolute',top:'40%',left:0,right:0,height:2,background:'rgba(201,169,110,.07)'}}/>
+                <div style={{position:'absolute',left:'40%',top:0,bottom:0,width:2,background:'rgba(201,169,110,.07)'}}/>
+                <div className="map-pin" style={{top:'37%',left:'37%',transform:'translate(-50%,-50%)'}}/>
+                <div style={{position:'absolute',top:'calc(37% + 16px)',left:'37%',transform:'translateX(-50%)',background:'var(--ink2)',border:'1px solid rgba(201,169,110,.2)',borderRadius:4,padding:'4px 10px',fontSize:11,color:'var(--gold)',whiteSpace:'nowrap'}}>{p.county} County, {p.state}</div>
+                <div style={{position:'absolute',bottom:14,right:14,background:'rgba(12,11,9,.8)',backdropFilter:'blur(8px)',border:'1px solid rgba(201,169,110,.15)',borderRadius:6,padding:'6px 12px',fontSize:11,color:'var(--warm)'}}>Interactive map · Firebase ready</div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── PAYMENT CALCULATOR (sticky) ── */}
+          <div>
+            <div className="fa fa1" style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.2)',borderRadius:12,padding:24,position:'sticky',top:82,boxShadow:'0 8px 40px rgba(0,0,0,.4)'}}>
+              <div style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:4}}>{p.isRental?'Lease':'Payment'} Calculator</div>
+              <div style={{fontSize:12,color:'var(--warm2)',marginBottom:20}}>Adjust to find your perfect plan</div>
+
+              {/* Price display */}
+              <div style={{textAlign:'center',marginBottom:20,padding:'16px',background:'linear-gradient(135deg,rgba(201,169,110,.06),rgba(201,169,110,.03))',border:'1px solid rgba(201,169,110,.12)',borderRadius:8}}>
+                <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:4}}>List Price</div>
+                <div style={{fontFamily:"'JetBrains Mono'",fontSize:30,fontWeight:600,color:'var(--gold2)',letterSpacing:'-.02em'}}>{fmtF(p.price)}</div>
+              </div>
+
+              {/* Down payment slider */}
+              {!p.isRental&&(
+                <div style={{marginBottom:20}}>
+                  <div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}>
+                    <span style={{fontSize:12,color:'var(--warm)'}}>Down Payment</span>
+                    <span style={{fontFamily:"'JetBrains Mono'",fontSize:12,color:'var(--gold2)',fontWeight:600}}>{dp}% · {fmtF(da)}</span>
+                  </div>
+                  <input type="range" min={p.minDown} max={50} value={dp} onChange={e=>setDp(+e.target.value)} style={{width:'100%',accentColor:'var(--gold)',cursor:'pointer',height:4}}/>
+                  <div style={{display:'flex',justifyContent:'space-between',fontSize:10,color:'var(--warm2)',marginTop:4}}>
+                    <span>Min {p.minDown}%</span><span>50%</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Loan term */}
+              <div style={{marginBottom:20}}>
+                <div style={{fontSize:12,color:'var(--warm)',marginBottom:8}}>{p.isRental?'Lease Length':'Loan Term'}</div>
+                <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+                  {terms.map(t=>(
+                    <button key={t} onClick={()=>setTerm(t)} style={{padding:'8px 12px',borderRadius:6,cursor:'pointer',border:`1px solid ${term===t?'var(--gold)':'rgba(201,169,110,.15)'}`,background:term===t?'rgba(201,169,110,.12)':'transparent',color:term===t?'var(--gold2)':'var(--warm2)',fontSize:12,fontWeight:600,fontFamily:"'JetBrains Mono'",transition:'all .2s'}}>
+                      {t>=12?`${t/12}yr${t>12?'s':''}` :`${t}mo`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Monthly payment display */}
+              <div style={{background:'linear-gradient(135deg,rgba(201,169,110,.1),rgba(201,169,110,.06))',border:'1px solid rgba(201,169,110,.2)',borderRadius:8,padding:'20px',marginBottom:16}}>
+                <div style={{textAlign:'center',marginBottom:12}}>
+                  <div style={{fontSize:9,color:'var(--gold-dim)',textTransform:'uppercase',letterSpacing:'.12em',marginBottom:4}}>Monthly Payment</div>
+                  <div style={{fontFamily:"'JetBrains Mono'",fontSize:38,fontWeight:600,color:'var(--gold2)',letterSpacing:'-.03em',lineHeight:1}}>${Math.round(mo).toLocaleString()}</div>
+                  <div style={{fontSize:11,color:'var(--warm2)',marginTop:4}}>/month · {term>=12?`${term/12}yr term`:term+' months'}</div>
+                </div>
+                {!p.isRental&&(
+                  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8,borderTop:'1px solid rgba(201,169,110,.12)',paddingTop:12}}>
+                    {[{l:'Down',v:fmtF(da)},{l:'Financed',v:fmtF(fi)},{l:'Total Interest',v:fmtF(int)}].map((s,i)=>(
+                      <div key={i} style={{textAlign:'center'}}>
+                        <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.06em',marginBottom:2}}>{s.l}</div>
+                        <div style={{fontFamily:"'JetBrains Mono'",fontSize:11,color:i===2?'var(--warm)':'var(--cream)',fontWeight:500}}>{s.v}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button onClick={onCheckout} className="btn-gold" style={{width:'100%',justifyContent:'center',padding:'15px',fontSize:14,borderRadius:8,animation:'pulseGold 2.5s infinite',marginBottom:8}}>
+                {p.isRental?`Apply for Lease →`:`Secure with ${fmtF(da)} Down →`}
+              </button>
+              <div style={{textAlign:'center',fontSize:11,color:'var(--warm2)',marginBottom:14}}>
+                {p.isRental?'No credit check · Month-to-month available':'Owner financed · No bank required'}
+              </div>
+              <div style={{display:'flex',gap:6,justifyContent:'center',flexWrap:'wrap'}}>
+                {['🔒 Secure','📋 No bank','✅ No credit check'].map(b=><span key={b} style={{fontSize:10,color:'var(--warm2)',padding:'4px 8px',background:'rgba(255,255,255,.03)',borderRadius:4,border:'1px solid rgba(255,255,255,.05)'}}>{b}</span>)}
+              </div>
+
+              {/* Contact agent */}
+              <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid rgba(201,169,110,.08)'}}>
+                <button style={{width:'100%',padding:'12px',background:'none',border:'1px solid rgba(201,169,110,.2)',borderRadius:8,color:'var(--warm)',fontSize:13,cursor:'pointer',transition:'all .2s'}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)';}} onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.2)';e.currentTarget.style.color='var(--warm)';}}>
+                  📞 Contact MAQ Group
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── CHECKOUT ── */
+function Checkout({p,onComplete,onBack}){
+  const[step,setStep]=useState(1);
+  const[form,setForm]=useState({name:'',email:'',phone:'',address:''});
+  const[card,setCard]=useState({number:'',exp:'',cvc:''});
+  const[proc,setProc]=useState(false);
+  const u=(k,v)=>setForm(x=>({...x,[k]:v}));
+  const uc=(k,v)=>setCard(x=>({...x,[k]:v}));
+  const da=p.isRental?p.price*2:p.price*p.minDown/100;
+  const mo=p.isRental?p.price:calcPmt(p.price-da,p.rate,p.maxTerm);
+  const step1Valid=form.name.trim().length>1&&form.email.includes('@')&&form.phone.length>8&&form.address.trim().length>5;
+  const step2Valid=card.number.replace(/\s/g,'').length>=15&&card.exp.length>=4&&card.cvc.length>=3;
+  const STEPS=['Your Info','Payment','Review'];
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      <div style={{maxWidth:680,margin:'0 auto',padding:'28px 24px 80px'}}>
+        <button onClick={step>1?()=>setStep(s=>s-1):onBack} style={{background:'none',border:'none',color:'var(--warm)',fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',gap:6,marginBottom:28,padding:0}}>← {step>1?'Back':'Return to property'}</button>
+
+        {/* Step indicator */}
+        <div style={{display:'flex',marginBottom:32,gap:0}}>
+          {STEPS.map((s,i)=>(
+            <div key={i} style={{flex:1,textAlign:'center',cursor:i+1<step?'pointer':'default'}} onClick={()=>{if(i+1<step)setStep(i+1);}}>
+              <div style={{display:'flex',alignItems:'center'}}>
+                <div style={{height:2,flex:1,background:i===0?'transparent':i+1<=step?'var(--gold)':'rgba(201,169,110,.15)',transition:'background .4s'}}/>
+                <div style={{width:28,height:28,borderRadius:'50%',background:i+1===step?'var(--gold)':i+1<step?'rgba(201,169,110,.3)':'rgba(255,255,255,.06)',border:i+1===step?'none':'1px solid rgba(201,169,110,.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:i+1===step?'var(--ink)':i+1<step?'var(--gold2)':'var(--warm2)',flexShrink:0,transition:'all .3s'}}>
+                  {i+1<step?'✓':i+1}
+                </div>
+                <div style={{height:2,flex:1,background:i===STEPS.length-1?'transparent':i+2<=step?'var(--gold)':'rgba(201,169,110,.15)',transition:'background .4s'}}/>
+              </div>
+              <div style={{fontSize:11,color:i+1===step?'var(--gold2)':i+1<step?'var(--warm)':'var(--warm2)',marginTop:6,fontWeight:i+1===step?500:300}}>{s}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Property summary strip */}
+        <div style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.12)',borderRadius:10,padding:'14px 18px',marginBottom:24,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+          <div style={{display:'flex',gap:12,alignItems:'center'}}>
+            <div style={{fontSize:28}}>{p.emoji}</div>
+            <div>
+              <div style={{fontFamily:"'DM Serif Display'",fontSize:15,color:'var(--cream)'}}>{p.name}</div>
+              <div style={{fontSize:11,color:'var(--warm2)',marginTop:1}}>{p.address}</div>
+            </div>
+          </div>
+          <div style={{textAlign:'right'}}>
+            <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:2}}>Due Today</div>
+            <div style={{fontFamily:"'JetBrains Mono'",fontSize:18,color:'var(--gold2)',fontWeight:600}}>{fmtF(da)}</div>
+          </div>
+        </div>
+
+        <div style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.12)',borderRadius:10,padding:28}}>
+
+          {/* STEP 1: Personal Info */}
+          {step===1&&(
+            <div className="fa">
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:6}}>Your information</h3>
+              <div style={{fontSize:12,color:'var(--warm2)',marginBottom:22}}>Used for your purchase agreement and communications.</div>
+              <div style={{display:'flex',flexDirection:'column',gap:14}}>
+                <div><label className="lbl">Full Legal Name</label><input className="inp" value={form.name} onChange={e=>u('name',e.target.value)} placeholder="John Smith"/></div>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                  <div><label className="lbl">Email Address</label><input className="inp" type="email" value={form.email} onChange={e=>u('email',e.target.value)} placeholder="john@example.com"/></div>
+                  <div><label className="lbl">Phone Number</label><input className="inp" value={form.phone} onChange={e=>u('phone',e.target.value)} placeholder="(561) 123-4567"/></div>
+                </div>
+                <div><label className="lbl">Mailing Address</label><input className="inp" value={form.address} onChange={e=>u('address',e.target.value)} placeholder="123 Main St, Boca Raton, FL 33432"/></div>
+              </div>
+              <button onClick={()=>{if(step1Valid)setStep(2);}} disabled={!step1Valid}
+                className={step1Valid?'btn-gold':''}
+                style={{width:'100%',justifyContent:'center',padding:'14px',fontSize:14,marginTop:22,borderRadius:8,opacity:step1Valid?1:.5,cursor:step1Valid?'pointer':'not-allowed',...(!step1Valid?{background:'rgba(255,255,255,.06)',color:'var(--warm2)',border:'none',fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center'}:{})}}>
+                Continue to Payment →
+              </button>
+            </div>
+          )}
+
+          {/* STEP 2: Payment */}
+          {step===2&&(
+            <div className="fa">
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:6}}>Payment details</h3>
+              <div style={{fontSize:12,color:'var(--warm2)',marginBottom:22}}>🔒 256-bit SSL · Your card is charged {fmtF(da)} today to secure your property.</div>
+              <div style={{display:'flex',flexDirection:'column',gap:14}}>
+                <div>
+                  <label className="lbl">Card Number</label>
+                  <div style={{position:'relative'}}>
+                    <input className="inp" value={card.number} onChange={e=>uc('number',e.target.value.replace(/[^\d\s]/g,'').slice(0,19))} placeholder="1234 5678 9012 3456"/>
+                    <span style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',fontSize:18}}>
+                      {card.number.startsWith('4')?'💳':card.number.startsWith('5')?'💳':'💳'}
+                    </span>
+                  </div>
+                </div>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                  <div><label className="lbl">Expiry Date</label><input className="inp" value={card.exp} onChange={e=>uc('exp',e.target.value)} placeholder="MM / YY"/></div>
+                  <div><label className="lbl">Security Code</label><input className="inp" value={card.cvc} onChange={e=>uc('cvc',e.target.value.slice(0,4))} placeholder="CVC"/></div>
+                </div>
+              </div>
+              <div style={{margin:'16px 0',padding:'11px 14px',background:'rgba(90,158,111,.06)',border:'1px solid rgba(90,158,111,.2)',borderRadius:6,fontSize:12,color:'#7DC89A'}}>
+                ✓ 5-day cancellation window · No bank required · Owner financed
+              </div>
+              <button onClick={()=>{if(step2Valid)setStep(3);}} disabled={!step2Valid}
+                className={step2Valid?'btn-gold':''}
+                style={{width:'100%',justifyContent:'center',padding:'14px',fontSize:14,borderRadius:8,opacity:step2Valid?1:.5,cursor:step2Valid?'pointer':'not-allowed',...(!step2Valid?{background:'rgba(255,255,255,.06)',color:'var(--warm2)',border:'none',fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center'}:{})}}>
+                Review Order →
+              </button>
+            </div>
+          )}
+
+          {/* STEP 3: Review + Confirm */}
+          {step===3&&(
+            <div className="fa">
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:20}}>Review your order</h3>
+              {/* Summary */}
+              <div style={{background:'rgba(201,169,110,.04)',border:'1px solid rgba(201,169,110,.1)',borderRadius:8,padding:'16px 18px',marginBottom:18}}>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px 20px'}}>
+                  {[{l:'Buyer',v:form.name},{l:'Email',v:form.email},{l:'Phone',v:form.phone},{l:'Mailing Address',v:form.address},{l:'Down Payment',v:fmtF(da)},{l:'Monthly Payment',v:fmtM(mo)},{l:'Rate',v:p.rate+'% APR'},{l:'Term',v:p.maxTerm>=12?`${p.maxTerm/12}yr`:`${p.maxTerm}mo`}].map(r=>(
+                    <div key={r.l}>
+                      <div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:2}}>{r.l}</div>
+                      <div style={{fontSize:13,color:'var(--cream)',fontWeight:500,wordBreak:'break-all'}}>{r.v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{padding:'12px 14px',background:'rgba(201,169,110,.05)',border:'1px solid rgba(201,169,110,.12)',borderRadius:6,fontSize:12,color:'var(--warm)',marginBottom:18}}>
+                Card ending in <strong style={{color:'var(--cream)'}}>{card.number.slice(-4)||'****'}</strong> · Charged {fmtF(da)} today
+              </div>
+              <button onClick={()=>{if(!proc){setProc(true);setTimeout(()=>onComplete({...form,downPayment:da,monthly:mo,property:p}),2400);}}}
+                disabled={proc} className={proc?'':'btn-gold'}
+                style={{width:'100%',justifyContent:'center',padding:'15px',fontSize:14,borderRadius:8,
+                  ...(proc?{background:'rgba(255,255,255,.08)',color:'var(--warm)',border:'none',fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:10}:{})}}>
+                {proc?<><span className="spinner"/><span>Processing reservation…</span></>:`Confirm & Pay ${fmtF(da)}`}
+              </button>
+              <div style={{textAlign:'center',marginTop:8,fontSize:11,color:'var(--warm2)'}}>🔒 Secured by Stripe · Owner financed by MAQ Group</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── STAYS BROWSE (Airbnb-quality) ── */
+function StaysBrowse({onSel}){
+  const[filter,setFilter]=useState('all');
+  const[guests,setGuests]=useState(1);
+  const[maxP,setMaxP]=useState(999);
+  const[ci,setCi]=useState('');
+  const[co,setCo]=useState('');
+  const[showFilters,setShowFilters]=useState(false);
+  const STYPES=[
+    {k:'all',l:'🏠 All',lf:'All Stays'},
+    {k:'condo',l:'🏢 Condo',lf:'Condos'},
+    {k:'house',l:'🏡 Home',lf:'Homes'},
+    {k:'villa',l:'🌺 Villa',lf:'Villas'},
+    {k:'estate',l:'👑 Estate',lf:'Estates'},
+  ];
+  const list=useMemo(()=>STAYS.filter(s=>(filter==='all'||s.type===filter)&&s.night<=maxP&&s.guests>=guests),[filter,maxP,guests]);
+
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+
+      {/* ── SEARCH HERO ── */}
+      <div style={{background:'var(--ink2)',borderBottom:'1px solid rgba(201,169,110,.1)',padding:'32px 32px 0'}}>
+        <div style={{maxWidth:1280,margin:'0 auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:20,flexWrap:'wrap',gap:12}}>
+            <div>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:8,fontWeight:500}}>✦ Short-Term Rentals</div>
+              <h1 style={{fontFamily:"'DM Serif Display'",fontSize:'clamp(28px,3.5vw,42px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.01em'}}>MAQ <em style={{fontStyle:'italic',color:'var(--gold2)'}}>Stays</em></h1>
+            </div>
+            <p style={{fontSize:13,color:'var(--warm)',maxWidth:420,lineHeight:1.65}}>Luxury short-term rentals across South Florida — oceanfront condos, private villas, exclusive estates. All managed by MAQ Group.</p>
+          </div>
+
+          {/* Airbnb-style search bar */}
+          <div style={{display:'flex',background:'var(--ink)',border:'1px solid rgba(201,169,110,.25)',borderRadius:50,overflow:'hidden',maxWidth:760,marginBottom:24,boxShadow:'0 4px 24px rgba(0,0,0,.4)'}}>
+            <div style={{flex:'1',padding:'14px 24px',borderRight:'1px solid rgba(201,169,110,.12)',cursor:'pointer'}}>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>Where</div>
+              <div style={{fontSize:13,color:'var(--warm2)'}}>South Florida</div>
+            </div>
+            <div style={{flex:'1',padding:'14px 20px',borderRight:'1px solid rgba(201,169,110,.12)'}}>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>Check in</div>
+              <input type="date" value={ci} onChange={e=>setCi(e.target.value)} style={{background:'none',border:'none',color:ci?'var(--cream)':'var(--warm2)',fontSize:13,cursor:'pointer',outline:'none',width:'100%'}} placeholder="Add date"/>
+            </div>
+            <div style={{flex:'1',padding:'14px 20px',borderRight:'1px solid rgba(201,169,110,.12)'}}>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>Check out</div>
+              <input type="date" value={co} onChange={e=>setCo(e.target.value)} style={{background:'none',border:'none',color:co?'var(--cream)':'var(--warm2)',fontSize:13,cursor:'pointer',outline:'none',width:'100%'}} placeholder="Add date"/>
+            </div>
+            <div style={{flex:'0 0 auto',padding:'14px 20px',borderRight:'1px solid rgba(201,169,110,.12)'}}>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>Guests</div>
+              <select value={guests} onChange={e=>setGuests(+e.target.value)} style={{background:'none',border:'none',color:'var(--cream)',fontSize:13,cursor:'pointer',outline:'none'}}>
+                {[1,2,3,4,5,6,8,10,12].map(n=><option key={n} value={n} style={{background:'var(--ink3)'}}>{n} guest{n>1?'s':''}</option>)}
+              </select>
+            </div>
+            <button className="btn-gold" style={{borderRadius:'0 50px 50px 0',padding:'0 28px',fontSize:13,gap:6}}>
+              <span>🔍</span> Search
+            </button>
+          </div>
+
+          {/* Category pills — Airbnb-style */}
+          <div style={{display:'flex',gap:0,overflowX:'auto',paddingBottom:0}}>
+            {STYPES.map(t=>(
+              <button key={t.k} onClick={()=>setFilter(t.k)}
+                style={{padding:'12px 20px',border:'none',borderBottom:filter===t.k?'2px solid var(--gold)':'2px solid transparent',background:'none',color:filter===t.k?'var(--gold2)':'var(--warm2)',fontSize:13,fontWeight:filter===t.k?500:300,cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',letterSpacing:'.01em'}}>
+                {t.l}
+              </button>
+            ))}
+            <div style={{marginLeft:'auto',display:'flex',alignItems:'center',paddingBottom:2}}>
+              <button onClick={()=>setShowFilters(f=>!f)}
+                style={{display:'flex',alignItems:'center',gap:7,padding:'9px 18px',border:'1px solid rgba(201,169,110,.2)',borderRadius:8,background:'none',color:'var(--warm)',fontSize:12,cursor:'pointer',transition:'all .2s',marginRight:8}}
+                onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)';}}
+                onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.2)';e.currentTarget.style.color='var(--warm)';}}>
+                ⚙ Filters {showFilters?'▲':'▼'}
+              </button>
+              <span style={{fontSize:12,color:'var(--warm2)',whiteSpace:'nowrap'}}>{list.length} stays</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Expanded filters */}
+      {showFilters&&(
+        <div style={{background:'var(--ink3)',borderBottom:'1px solid rgba(201,169,110,.08)',padding:'18px 32px',animation:'fadeUp .3s both'}}>
+          <div style={{maxWidth:1280,margin:'0 auto',display:'flex',alignItems:'center',gap:32,flexWrap:'wrap'}}>
+            <div style={{display:'flex',alignItems:'center',gap:10}}>
+              <span style={{fontSize:12,color:'var(--warm)'}}>Max price</span>
+              <input type="range" min={99} max={999} step={50} value={maxP} onChange={e=>setMaxP(+e.target.value)} style={{accentColor:'var(--gold)',width:120}}/>
+              <span style={{fontFamily:"'JetBrains Mono'",fontSize:12,color:'var(--gold2)',minWidth:72}}>${maxP}/night</span>
+            </div>
+            <div style={{height:20,width:1,background:'rgba(201,169,110,.1)'}}/>
+            <div style={{display:'flex',gap:8}}>
+              {[{l:'Oceanfront',v:'🌊'},{l:'Pool',v:'🏊'},{l:'Pet Friendly',v:'🐾'},{l:'Free Parking',v:'🚗'}].map(f=>(
+                <span key={f.l} style={{padding:'6px 12px',border:'1px solid rgba(201,169,110,.15)',borderRadius:20,fontSize:11,color:'var(--warm)',cursor:'pointer',transition:'all .2s'}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(201,169,110,.15)';e.currentTarget.style.color='var(--warm)';}}>
+                  {f.v} {f.l}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Grid */}
+      <div style={{maxWidth:1280,margin:'0 auto',padding:'32px 32px 80px'}}>
+        {list.length===0?(
+          <div style={{textAlign:'center',padding:'80px 0'}}>
+            <div style={{fontSize:52,marginBottom:16}}>🔍</div>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:24,color:'var(--warm)',marginBottom:8}}>No stays found</div>
+            <div style={{fontSize:13,color:'var(--warm2)',marginBottom:20}}>Try adjusting your filters</div>
+            <button className="btn-ghost" onClick={()=>{setFilter('all');setGuests(1);setMaxP(999);}}>Clear filters</button>
+          </div>
+        ):(
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))',gap:28}}>
+            {list.map((s,i)=><StayCard key={s.id} s={s} onClick={()=>onSel(s)} delay={Math.min(i,5)}/>)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StayCard({s,onClick,delay}){
+  const[hov,setHov]=useState(false);
+  const[saved,setSaved]=useState(false);
+  // Distinct gradient per stay type
+  const gradients={
+    condo:'linear-gradient(155deg,#0D1E2E 0%,#1A3A4A 50%,#0E2218 100%)',
+    house:'linear-gradient(155deg,#1A1408 0%,#2E2010 50%,#181818 100%)',
+    villa:'linear-gradient(155deg,#1A0E1A 0%,#2E1B3A 50%,#0E1A10 100%)',
+    estate:'linear-gradient(155deg,#0E0E0E 0%,#1A1200 50%,#200E00 100%)',
+  };
+  const bg=gradients[s.type]||gradients.condo;
+  return(
+    <div className={`fa fa${delay}`} onClick={onClick} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
+      style={{cursor:'pointer',borderRadius:12,overflow:'hidden',transition:'all .3s',transform:hov?'translateY(-4px)':'none',boxShadow:hov?'0 20px 50px rgba(0,0,0,.5)':'none'}}>
+      {/* Photo area */}
+      <div style={{height:240,background:bg,position:'relative',overflow:'hidden',borderRadius:12,marginBottom:12}}>
+        {/* Main emoji display */}
+        <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <div style={{fontSize:80,filter:'drop-shadow(0 8px 32px rgba(0,0,0,.6))',transition:'transform .3s',transform:hov?'scale(1.08)':'scale(1)'}}>{s.emoji}</div>
+        </div>
+        {/* Subtle ambient glow */}
+        <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at center,rgba(201,169,110,.06) 0%,transparent 70%)'}}/>
+        {/* Top row badges */}
+        <div style={{position:'absolute',top:12,left:12,right:12,display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+          <span className="tag tg" style={{backdropFilter:'blur(8px)',background:'rgba(12,11,9,.75)',border:'1px solid rgba(201,169,110,.3)'}}>{s.hi}</span>
+          <button onClick={e=>{e.stopPropagation();setSaved(v=>!v);}}
+            style={{width:32,height:32,borderRadius:'50%',background:'rgba(12,11,9,.6)',border:'none',cursor:'pointer',fontSize:16,display:'flex',alignItems:'center',justifyContent:'center',backdropFilter:'blur(8px)',transition:'transform .2s',transform:saved?'scale(1.2)':'scale(1)'}}>
+            {saved?'❤️':'🤍'}
+          </button>
+        </div>
+        {/* Rating badge bottom */}
+        <div style={{position:'absolute',bottom:12,left:12,background:'rgba(12,11,9,.8)',backdropFilter:'blur(8px)',borderRadius:6,padding:'4px 10px',display:'flex',alignItems:'center',gap:5}}>
+          <span style={{color:'#FFD700',fontSize:12}}>★</span>
+          <span style={{fontSize:12,color:'var(--cream)',fontWeight:600}}>{s.rating}</span>
+          <span style={{fontSize:11,color:'var(--warm2)'}}>({s.reviews})</span>
+        </div>
+        {/* Photo count indicator */}
+        <div style={{position:'absolute',bottom:12,right:12,background:'rgba(12,11,9,.8)',backdropFilter:'blur(8px)',borderRadius:6,padding:'4px 10px',fontSize:10,color:'var(--warm2)',display:'flex',alignItems:'center',gap:4}}>
+          📷 6 photos
+        </div>
+        {/* Bottom gradient */}
+        <div style={{position:'absolute',bottom:0,left:0,right:0,height:80,background:'linear-gradient(transparent,rgba(12,11,9,.7))'}}/>
+      </div>
+      {/* Info */}
+      <div style={{padding:'0 4px 8px'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:4}}>
+          <div style={{fontFamily:"'Outfit'",fontSize:15,fontWeight:500,color:'var(--cream)',lineHeight:1.3,flex:1,paddingRight:8}}>{s.name}</div>
+          <div style={{textAlign:'right',flexShrink:0}}>
+            <span style={{fontFamily:"'DM Serif Display'",fontSize:18,color:'var(--gold2)'}}>${s.night}</span>
+            <span style={{fontSize:11,color:'var(--warm2)'}}> /night</span>
+          </div>
+        </div>
+        <div style={{fontSize:12,color:'var(--warm2)',marginBottom:6,fontStyle:'italic'}}>{s.tagline}</div>
+        <div style={{fontSize:12,color:'var(--warm2)',marginBottom:8}}>📍 {s.addr}</div>
+        <div style={{display:'flex',gap:10,fontSize:11,color:'var(--warm2)'}}>
+          <span>🛏 {s.beds} bd</span>
+          <span>🚿 {s.baths} ba</span>
+          <span>👥 {s.guests} guests</span>
+          {s.amen.includes('Private Beach')||s.amen.includes('Oceanfront')?<span style={{color:'var(--blue)'}}>🌊 Oceanfront</span>:null}
+          {s.amen.includes('Private Pool')||s.amen.includes('Heated Pool')?<span style={{color:'#7DC89A'}}>🏊 Pool</span>:null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── STAY DETAIL (Airbnb-quality) ── */
+function StayDetail({s,onBack,onBook}){
+  const[ci,setCi]=useState('');
+  const[co,setCo]=useState('');
+  const[gc,setGc]=useState(1);
+  const[showAllAmen,setShowAllAmen]=useState(false);
+  const[showPhotoModal,setShowPhotoModal]=useState(false);
+  const nights=useMemo(()=>{if(!ci||!co)return 0;const d=(new Date(co)-new Date(ci))/86400000;return d>0?d:0;},[ci,co]);
+  const sub=nights*s.night;
+  const svcFee=Math.round(sub*0.12);
+  const tot=sub+s.clean+svcFee;
+
+  // Fake reviews
+  const REVIEWS=[
+    {name:'Adriana M.',date:'March 2025',text:`Absolutely stunning. The ${s.type==='estate'?'estate':'property'} exceeded all expectations. MAQ Group was incredibly responsive and everything was exactly as described.`,rating:5,avatar:'👩'},
+    {name:'James K.',date:'February 2025',text:`Perfect location, immaculate condition. The amenities were top-notch and we had everything we needed. Will definitely book again.`,rating:5,avatar:'👨'},
+    {name:'Priya S.',date:'January 2025',text:`Beautiful space and very well maintained. Check-in was seamless. The ${s.amen[0]} alone made the whole trip worth it.`,rating:s.rating>=4.8?5:4,avatar:'👩‍💼'},
+  ];
+
+  const amenIcons={'Private Beach':'🏖️','Ocean View':'🌊','Heated Pool':'🏊','WiFi 1Gbps':'📶','Chef Kitchen':'👨‍🍳','Valet Parking':'🚗','W/D In-Unit':'🧺','Concierge':'🛎️','Gym':'🏋️','AC':'❄️','High-Speed WiFi':'📶','Full Kitchen':'🍳','Parking':'🚗','Private Balcony':'🌅','Fiber WiFi':'📶','Wrap Balcony':'🌅','Spa Access':'💆','EV Charging':'⚡','Private Pool':'🏊','Tennis':'🎾','2-Car Garage':'🚗','Gated Entry':'🔒','Outdoor Dining':'🍽️','Oceanfront':'🌊','Resort Pool':'🏊','Valet':'🚗','Infinity Pool':'♾️','Private Lake':'💧','Theater Room':'🎬','Outdoor Kitchen':'🔥','Fire Pit':'🔥','Spa':'💆','6-Car Garage':'🏎️','Fenced Yard':'🌿','3-Car Garage':'🚗','BBQ Grill':'🔥','Pet Friendly':'🐾','Community Pool':'🏊','Laundry':'🧺','Private Patio':'🌿','Private Yard':'🌿','BBQ':'🔥','WiFi':'📶','Gourmet Kitchen':'👨‍🍳'};
+
+  const gradients={
+    condo:'linear-gradient(155deg,#0D1E2E 0%,#1A3A4A 50%,#0E2218 100%)',
+    house:'linear-gradient(155deg,#1A1408 0%,#2E2010 50%,#181818 100%)',
+    villa:'linear-gradient(155deg,#1A0E1A 0%,#2E1B3A 50%,#0E1A10 100%)',
+    estate:'linear-gradient(155deg,#0E0E0E 0%,#1A1200 50%,#200E00 100%)',
+  };
+
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      {/* Photo Modal */}
+      {showPhotoModal&&(
+        <div className="modal-overlay" onClick={()=>setShowPhotoModal(false)}>
+          <div style={{background:'var(--ink2)',borderRadius:12,padding:32,maxWidth:600,width:'100%',textAlign:'center'}} onClick={e=>e.stopPropagation()}>
+            <div style={{fontSize:88,marginBottom:16}}>{s.emoji}</div>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:24,color:'var(--cream)',marginBottom:8}}>{s.name}</div>
+            <div style={{fontSize:13,color:'var(--warm2)',marginBottom:20}}>Photo gallery will display property images from the MAQ Group listing database once connected.</div>
+            <button className="btn-gold" onClick={()=>setShowPhotoModal(false)}>Close Gallery</button>
+          </div>
+        </div>
+      )}
+
+      <div style={{maxWidth:1200,margin:'0 auto',padding:'22px 32px 80px'}}>
+        {/* Back */}
+        <button onClick={onBack} style={{background:'none',border:'none',color:'var(--warm)',fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',gap:6,marginBottom:20,padding:0,transition:'color .2s'}}
+          onMouseEnter={e=>e.currentTarget.style.color='var(--gold)'} onMouseLeave={e=>e.currentTarget.style.color='var(--warm)'}>
+          ← All stays
+        </button>
+
+        {/* Title row */}
+        <div className="fa" style={{marginBottom:16}}>
+          <h1 style={{fontFamily:"'DM Serif Display'",fontSize:'clamp(24px,3vw,36px)',fontWeight:400,color:'var(--cream)',letterSpacing:'-.01em',marginBottom:8}}>{s.name}</h1>
+          <div style={{display:'flex',alignItems:'center',gap:14,flexWrap:'wrap',fontSize:13}}>
+            <span style={{color:'#FFD700'}}>★ <strong style={{color:'var(--cream)'}}>{s.rating}</strong></span>
+            <span style={{color:'var(--warm2)',textDecoration:'underline',cursor:'pointer'}}>{s.reviews} reviews</span>
+            <span style={{color:'var(--warm2)'}}>·</span>
+            <span style={{color:'var(--warm)'}}>📍 {s.addr}</span>
+            <span style={{color:'var(--warm2)'}}>·</span>
+            <span className="tag tg">{s.hi}</span>
+          </div>
+        </div>
+
+        {/* Photo Grid */}
+        <div className="fa fa1 photo-grid" style={{marginBottom:32}}>
+          {/* Main large photo */}
+          <div className="photo-grid-cell" style={{background:gradients[s.type]||gradients.condo}} onClick={()=>setShowPhotoModal(true)}>
+            <div style={{fontSize:90,filter:'drop-shadow(0 8px 40px rgba(0,0,0,.5))'}}>{s.emoji}</div>
+            <div style={{position:'absolute',bottom:16,left:16}}><span className="tag tg">{s.hi}</span></div>
+          </div>
+          {/* 4 smaller photos */}
+          {[
+            {bg:'linear-gradient(135deg,#0a1520,#1a3040)',icon:'🌅',label:'View'},
+            {bg:'linear-gradient(135deg,#0a200a,#1a3a1a)',icon:'🏊',label:'Pool'},
+            {bg:'linear-gradient(135deg,#201510,#3a2510)',icon:'🛋️',label:'Living'},
+            {bg:'linear-gradient(135deg,#150a20,#2a1540)',icon:'🛏️',label:'Bedroom'},
+          ].map((p,i)=>(
+            <div key={i} className="photo-grid-cell" style={{background:p.bg,position:'relative'}} onClick={()=>setShowPhotoModal(true)}>
+              <div style={{fontSize:32}}>{p.icon}</div>
+              <div style={{position:'absolute',bottom:8,left:10,fontSize:10,color:'rgba(255,255,255,.5)',letterSpacing:'.05em'}}>{p.label}</div>
+              {i===3&&<button onClick={e=>{e.stopPropagation();setShowPhotoModal(true);}} style={{position:'absolute',bottom:12,right:12,background:'rgba(255,255,255,.15)',backdropFilter:'blur(8px)',border:'1px solid rgba(255,255,255,.25)',borderRadius:6,color:'var(--cream)',fontSize:11,fontWeight:600,padding:'5px 12px',cursor:'pointer'}}>Show all photos</button>}
+            </div>
+          ))}
+        </div>
+
+        {/* Main content + sticky widget */}
+        <div style={{display:'grid',gridTemplateColumns:'1.4fr 1fr',gap:48,alignItems:'start'}}>
+          <div>
+            {/* Host + quick stats */}
+            <div className="fa fa2" style={{display:'flex',justifyContent:'space-between',alignItems:'center',paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)',marginBottom:24}}>
+              <div>
+                <div style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:4}}>
+                  {s.type.charAt(0).toUpperCase()+s.type.slice(1)} in {s.addr.split(',')[0]}
+                </div>
+                <div style={{fontSize:13,color:'var(--warm)',display:'flex',gap:8,flexWrap:'wrap'}}>
+                  <span>{s.guests} guests</span><span>·</span>
+                  <span>{s.beds} bedroom{s.beds>1?'s':''}</span><span>·</span>
+                  <span>{s.baths} bath{s.baths>1?'s':''}</span><span>·</span>
+                  <span>{s.sqft.toLocaleString()} ft²</span>
+                </div>
+              </div>
+              <div style={{width:52,height:52,borderRadius:'50%',background:'linear-gradient(135deg,var(--gold),var(--gold2))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'JetBrains Mono'",fontWeight:700,fontSize:12,color:'var(--ink)',flexShrink:0}}>MAQ</div>
+            </div>
+
+            {/* Highlights */}
+            <div className="fa fa2" style={{display:'flex',flexDirection:'column',gap:16,marginBottom:28,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              {[
+                {ic:'🏅',ti:'Top-rated host',ds:'MAQ Group is in the top 5% of hosts based on ratings and response time.'},
+                {ic:'🔑',ti:'Great check-in',ds:'Recent guests rated check-in 5 stars. Seamless self-check-in available.'},
+                {ic:'📍',ti:'Prime location',ds:`${s.addr.split(',')[1]?.trim()||'South Florida'} — guests love the neighborhood.`},
+              ].map((h,i)=>(
+                <div key={i} style={{display:'flex',gap:14,alignItems:'flex-start'}}>
+                  <div style={{fontSize:24,flexShrink:0}}>{h.ic}</div>
+                  <div>
+                    <div style={{fontSize:14,fontWeight:500,color:'var(--cream)',marginBottom:2}}>{h.ti}</div>
+                    <div style={{fontSize:13,color:'var(--warm)',lineHeight:1.6}}>{h.ds}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Description */}
+            <div className="fa fa3" style={{marginBottom:28,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <p style={{fontSize:14,color:'var(--warm)',lineHeight:1.85}}>{s.desc}</p>
+            </div>
+
+            {/* Amenities */}
+            <div className="fa fa3" style={{marginBottom:28,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:18}}>What this place offers</h3>
+              <div className="amen-grid">
+                {(showAllAmen?s.amen:s.amen.slice(0,8)).map((a,i)=>(
+                  <div key={i} className="amen-item">
+                    <span style={{fontSize:18}}>{amenIcons[a]||'✓'}</span>
+                    <span>{a}</span>
+                  </div>
+                ))}
+              </div>
+              {s.amen.length>8&&(
+                <button onClick={()=>setShowAllAmen(v=>!v)} className="btn-ghost" style={{marginTop:14,padding:'10px 22px',fontSize:12}}>
+                  {showAllAmen?'Show less':'Show all '+s.amen.length+' amenities'}
+                </button>
+              )}
+            </div>
+
+            {/* Reviews */}
+            <div className="fa fa4" style={{marginBottom:28,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+              <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:20}}>
+                <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)'}}>★ {s.rating} · {s.reviews} reviews</h3>
+              </div>
+              {/* Rating breakdown */}
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'6px 28px',marginBottom:20}}>
+                {[{l:'Cleanliness',v:5},{l:'Accuracy',v:4.9},{l:'Check-in',v:5},{l:'Communication',v:5},{l:'Location',v:s.rating},{l:'Value',v:Math.min(s.rating,4.8)}].map(r=>(
+                  <div key={r.l} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'6px 0'}}>
+                    <span style={{fontSize:12,color:'var(--warm)'}}>{r.l}</span>
+                    <div style={{display:'flex',alignItems:'center',gap:8}}>
+                      <div style={{width:80,height:2,background:'rgba(255,255,255,.08)',borderRadius:1,overflow:'hidden'}}>
+                        <div style={{width:`${(r.v/5)*100}%`,height:'100%',background:'var(--cream)',borderRadius:1}}/>
+                      </div>
+                      <span style={{fontFamily:"'JetBrains Mono'",fontSize:11,color:'var(--cream)',minWidth:24}}>{r.v}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}>
+                {REVIEWS.map((r,i)=>(
+                  <div key={i} className="review-card">
+                    <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:10}}>
+                      <div style={{width:36,height:36,borderRadius:'50%',background:'linear-gradient(135deg,var(--ink3),var(--ink4))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,border:'1px solid rgba(201,169,110,.1)'}}>{r.avatar}</div>
+                      <div>
+                        <div style={{fontSize:13,fontWeight:500,color:'var(--cream)'}}>{r.name}</div>
+                        <div style={{fontSize:11,color:'var(--warm2)'}}>{r.date}</div>
+                      </div>
+                      <div style={{marginLeft:'auto',color:'#FFD700',fontSize:11}}>{'★'.repeat(r.rating)}</div>
+                    </div>
+                    <p style={{fontSize:13,color:'var(--warm)',lineHeight:1.65}}>{r.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Map / Location */}
+            <div className="fa fa5">
+              <h3 style={{fontFamily:"'DM Serif Display'",fontSize:22,color:'var(--cream)',marginBottom:6}}>Where you'll be</h3>
+              <div style={{fontSize:13,color:'var(--warm)',marginBottom:16}}>📍 {s.addr}</div>
+              <div className="map-placeholder" style={{height:240}}>
+                {/* Stylized map grid */}
+                <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(201,169,110,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.04) 1px,transparent 1px)',backgroundSize:'28px 28px'}}/>
+                {/* Road lines */}
+                <div style={{position:'absolute',top:'40%',left:0,right:0,height:2,background:'rgba(201,169,110,.08)'}}/>
+                <div style={{position:'absolute',top:'65%',left:0,right:0,height:1,background:'rgba(201,169,110,.05)'}}/>
+                <div style={{position:'absolute',left:'35%',top:0,bottom:0,width:2,background:'rgba(201,169,110,.08)'}}/>
+                <div style={{position:'absolute',left:'70%',top:0,bottom:0,width:1,background:'rgba(201,169,110,.05)'}}/>
+                {/* Pin */}
+                <div className="map-pin" style={{top:'36%',left:'32%',transform:'translate(-50%,-50%)'}}/>
+                <div style={{position:'absolute',top:'calc(36% + 14px)',left:'32%',transform:'translateX(-50%)',background:'var(--ink2)',border:'1px solid rgba(201,169,110,.2)',borderRadius:4,padding:'4px 10px',fontSize:11,color:'var(--gold)',whiteSpace:'nowrap'}}>
+                  {s.name}
+                </div>
+                {/* Map overlay label */}
+                <div style={{position:'absolute',bottom:14,right:14,background:'rgba(12,11,9,.8)',backdropFilter:'blur(8px)',border:'1px solid rgba(201,169,110,.15)',borderRadius:6,padding:'6px 12px',fontSize:11,color:'var(--warm)'}}>
+                  Interactive map coming soon
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── BOOKING WIDGET ── */}
+          <div>
+            <div className="book-widget fa fa2">
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:18}}>
+                <div>
+                  <span style={{fontFamily:"'DM Serif Display'",fontSize:28,color:'var(--gold2)'}}>${s.night}</span>
+                  <span style={{fontSize:13,color:'var(--warm2)'}}> / night</span>
+                </div>
+                <div style={{fontSize:13,color:'var(--warm2)'}}>
+                  <span style={{color:'#FFD700'}}>★</span> <strong style={{color:'var(--cream)'}}>{s.rating}</strong> · <span style={{textDecoration:'underline',cursor:'pointer'}}>{s.reviews} reviews</span>
+                </div>
+              </div>
+
+              {/* Date + guest picker */}
+              <div style={{border:'1px solid rgba(201,169,110,.25)',borderRadius:8,overflow:'hidden',marginBottom:10}}>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
+                  {[{l:'CHECK-IN',v:ci,s:setCi},{l:'CHECK-OUT',v:co,s:setCo}].map((f,i)=>(
+                    <div key={i} style={{padding:'12px 14px',borderRight:i===0?'1px solid rgba(201,169,110,.15)':'none',background:'rgba(255,255,255,.02)'}}>
+                      <div style={{fontSize:9,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>{f.l}</div>
+                      <input type="date" value={f.v} onChange={e=>f.s(e.target.value)} style={{background:'none',border:'none',color:f.v?'var(--cream)':'var(--warm2)',fontSize:13,cursor:'pointer',outline:'none',width:'100%'}}/>
+                    </div>
+                  ))}
+                </div>
+                <div style={{borderTop:'1px solid rgba(201,169,110,.15)',padding:'12px 14px',background:'rgba(255,255,255,.02)'}}>
+                  <div style={{fontSize:9,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.1em',fontWeight:600,marginBottom:2}}>GUESTS</div>
+                  <select value={gc} onChange={e=>setGc(+e.target.value)} style={{background:'none',border:'none',color:'var(--cream)',fontSize:13,cursor:'pointer',outline:'none',width:'100%'}}>
+                    {Array.from({length:s.guests},(_,i)=><option key={i+1} value={i+1} style={{background:'var(--ink3)'}}>{i+1} guest{i>0?'s':''}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <button onClick={()=>{if(nights>0)onBook(ci,co,gc,nights,tot);}}
+                disabled={nights===0}
+                className={nights>0?'btn-gold':''}
+                style={{width:'100%',justifyContent:'center',padding:'15px',fontSize:14,marginBottom:12,borderRadius:8,animation:nights>0?'pulseGold 2.5s infinite':'none',
+                  ...(nights===0?{background:'rgba(255,255,255,.06)',color:'var(--warm2)',border:'none',fontWeight:600,cursor:'not-allowed',fontFamily:"'Outfit'",borderRadius:8}:{})}}>
+                {nights>0?'Reserve →':'Select dates to reserve'}
+              </button>
+              <div style={{textAlign:'center',fontSize:11,color:'var(--warm2)',marginBottom:16}}>You won't be charged yet</div>
+
+              {/* Price breakdown */}
+              {nights>0&&(
+                <div style={{borderTop:'1px solid rgba(201,169,110,.1)',paddingTop:16}}>
+                  {[
+                    {l:`$${s.night} × ${nights} night${nights!==1?'s':''}`,v:sub},
+                    {l:'Cleaning fee',v:s.clean},
+                    {l:'MAQ service fee (12%)',v:svcFee},
+                  ].map((li,i)=>(
+                    <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 0',fontSize:13,color:'var(--warm)',borderBottom:'1px solid rgba(201,169,110,.05)'}}>
+                      <span style={{textDecoration:'underline',cursor:'help'}}>{li.l}</span>
+                      <span style={{fontFamily:"'JetBrains Mono'",color:'var(--cream)'}}>{fmtF(li.v)}</span>
+                    </div>
+                  ))}
+                  <div style={{display:'flex',justifyContent:'space-between',padding:'12px 0 0',fontSize:15,fontWeight:600}}>
+                    <span style={{color:'var(--cream)'}}>Total before taxes</span>
+                    <span style={{fontFamily:"'JetBrains Mono'",color:'var(--gold2)'}}>{fmtF(tot)}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Host info */}
+              <div style={{marginTop:18,paddingTop:16,borderTop:'1px solid rgba(201,169,110,.08)',display:'flex',gap:12,alignItems:'center'}}>
+                <div style={{width:42,height:42,borderRadius:'50%',background:'linear-gradient(135deg,var(--gold),var(--gold2))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'JetBrains Mono'",fontWeight:700,fontSize:10,color:'var(--ink)',flexShrink:0}}>MAQ</div>
+                <div>
+                  <div style={{fontSize:12,fontWeight:500,color:'var(--cream)'}}>Hosted by MAQ Group</div>
+                  <div style={{fontSize:11,color:'#7DC89A'}}>✓ Verified host · Superhost · Quick response</div>
+                </div>
+              </div>
+
+              {/* Safety */}
+              <div style={{marginTop:14,padding:'10px 12px',background:'rgba(90,158,111,.05)',border:'1px solid rgba(90,158,111,.15)',borderRadius:6,fontSize:11,color:'#7DC89A',textAlign:'center'}}>
+                ✓ Free cancellation up to 48 hours before check-in
+              </div>
+            </div>
+
+            {/* Report */}
+            <div style={{textAlign:'center',marginTop:14}}>
+              <button style={{background:'none',border:'none',color:'var(--warm2)',fontSize:11,cursor:'pointer',textDecoration:'underline'}}>Report this listing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── STAY BOOKING ── */
+function StayBook({s,bp,onComplete,onBack}){
+  const[form,setForm]=useState({name:'',email:'',phone:''});
+  const[card,setCard]=useState({number:'',exp:'',cvc:''});
+  const[proc,setProc]=useState(false);
+  const u=(k,v)=>setForm(x=>({...x,[k]:v}));
+  const uc=(k,v)=>setCard(x=>({...x,[k]:v}));
+  // Use booking params from detail page, or fallback defaults
+  const nights=bp?.nights||3;
+  const tot=bp?.tot||(s.night*3+s.clean);
+  const ci=bp?.ci||'';
+  const co=bp?.co||'';
+  const gc=bp?.gc||2;
+  const svcFee=Math.round(s.night*nights*0.12);
+
+  const valid=form.name.trim().length>1&&form.email.includes('@')&&form.phone.length>8&&card.number.replace(/\s/g,'').length>=15&&card.exp.length>=4&&card.cvc.length>=3;
+
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      <div style={{maxWidth:720,margin:'0 auto',padding:'28px 24px 80px',display:'grid',gridTemplateColumns:'1fr 380px',gap:36,alignItems:'start'}}>
+        <div>
+          <button onClick={onBack} style={{background:'none',border:'none',color:'var(--warm)',fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',gap:6,marginBottom:28,padding:0}}>← Edit reservation</button>
+          <h2 style={{fontFamily:"'DM Serif Display'",fontSize:28,color:'var(--cream)',marginBottom:6}}>Confirm & pay</h2>
+          <div style={{fontSize:13,color:'var(--warm)',marginBottom:28}}>You won't be charged until after your host confirms your reservation.</div>
+
+          {/* Trip details summary */}
+          <div style={{background:'rgba(201,169,110,.04)',border:'1px solid rgba(201,169,110,.1)',borderRadius:10,padding:'18px 20px',marginBottom:24}}>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:17,color:'var(--cream)',marginBottom:12}}>Your trip</div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div>
+                <div style={{fontSize:10,color:'var(--warm)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:4}}>Dates</div>
+                <div style={{fontSize:13,color:'var(--cream)',fontWeight:500}}>{ci&&co?`${new Date(ci+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${new Date(co+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`:`${nights} nights`}</div>
+              </div>
+              <div>
+                <div style={{fontSize:10,color:'var(--warm)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:4}}>Guests</div>
+                <div style={{fontSize:13,color:'var(--cream)',fontWeight:500}}>{gc} guest{gc>1?'s':''}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Personal info */}
+          <div style={{marginBottom:24,paddingBottom:24,borderBottom:'1px solid rgba(201,169,110,.08)'}}>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:16}}>Personal info</div>
+            <div style={{display:'flex',flexDirection:'column',gap:14}}>
+              <div><label className="lbl">Full Name</label><input className="inp" value={form.name} onChange={e=>u('name',e.target.value)} placeholder="John Smith"/></div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                <div><label className="lbl">Email</label><input className="inp" type="email" value={form.email} onChange={e=>u('email',e.target.value)} placeholder="john@example.com"/></div>
+                <div><label className="lbl">Phone</label><input className="inp" value={form.phone} onChange={e=>u('phone',e.target.value)} placeholder="(555) 123-4567"/></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Payment */}
+          <div style={{marginBottom:24}}>
+            <div style={{fontFamily:"'DM Serif Display'",fontSize:20,color:'var(--cream)',marginBottom:4}}>Pay with</div>
+            <div style={{fontSize:12,color:'var(--warm2)',marginBottom:16}}>🔒 Your payment info is encrypted and secure</div>
+            <div style={{display:'flex',flexDirection:'column',gap:12}}>
+              <div><label className="lbl">Card Number</label>
+                <input className="inp" value={card.number} onChange={e=>uc('number',e.target.value.replace(/[^\d\s]/g,'').slice(0,19))} placeholder="1234 5678 9012 3456"/>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                <div><label className="lbl">Expiry</label><input className="inp" value={card.exp} onChange={e=>uc('exp',e.target.value)} placeholder="MM / YY"/></div>
+                <div><label className="lbl">Security Code</label><input className="inp" value={card.cvc} onChange={e=>uc('cvc',e.target.value.slice(0,4))} placeholder="CVC"/></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cancellation */}
+          <div style={{padding:'14px 16px',background:'rgba(90,158,111,.05)',border:'1px solid rgba(90,158,111,.2)',borderRadius:8,fontSize:13,color:'#7DC89A',marginBottom:20}}>
+            ✓ Free cancellation up to 48 hours before check-in · No hidden fees
+          </div>
+
+          <button onClick={()=>{if(valid&&!proc){setProc(true);setTimeout(()=>onComplete({...form,total:tot,nights,checkIn:ci,checkOut:co,guests:gc}),2400);}}}
+            disabled={!valid||proc}
+            className={valid&&!proc?'btn-gold':''}
+            style={{width:'100%',justifyContent:'center',padding:'16px',fontSize:15,borderRadius:10,opacity:(!valid||proc)?.6:1,cursor:(!valid||proc)?'not-allowed':'pointer',
+              ...(!valid||proc?{background:'rgba(255,255,255,.06)',color:'var(--warm2)',border:'none',fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:10}:{})}}>
+            {proc?<><span className="spinner"/><span>Confirming reservation…</span></>:`Confirm Reservation · ${fmtF(tot)}`}
+          </button>
+          <div style={{textAlign:'center',marginTop:8,fontSize:11,color:'var(--warm2)'}}>By confirming you agree to MAQ Group's guest policy</div>
+        </div>
+
+        {/* Sticky property summary */}
+        <div style={{position:'sticky',top:86}}>
+          <div style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.15)',borderRadius:12,overflow:'hidden'}}>
+            <div style={{height:160,background:'linear-gradient(135deg,var(--ink3),var(--ink4))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:60,position:'relative'}}>
+              {s.emoji}
+              <div style={{position:'absolute',bottom:0,left:0,right:0,height:40,background:'linear-gradient(transparent,var(--ink2))'}}/>
+            </div>
+            <div style={{padding:'16px 20px'}}>
+              <div style={{fontFamily:"'DM Serif Display'",fontSize:17,color:'var(--cream)',marginBottom:4}}>{s.name}</div>
+              <div style={{fontSize:11,color:'var(--warm2)',marginBottom:2}}>{s.type.charAt(0).toUpperCase()+s.type.slice(1)} · {s.addr}</div>
+              <div style={{display:'flex',gap:6,alignItems:'center',fontSize:12,marginBottom:14,marginTop:6}}>
+                <span style={{color:'#FFD700'}}>★</span>
+                <span style={{color:'var(--cream)',fontWeight:500}}>{s.rating}</span>
+                <span style={{color:'var(--warm2)'}}>({s.reviews})</span>
+              </div>
+              <div className="divr" style={{marginBottom:14}}/>
+              <div style={{fontFamily:"'DM Serif Display'",fontSize:16,color:'var(--cream)',marginBottom:12}}>Price details</div>
+              {[
+                {l:`$${s.night} × ${nights} night${nights>1?'s':''}`,v:s.night*nights},
+                {l:'Cleaning fee',v:s.clean},
+                {l:'Service fee',v:svcFee},
+              ].map((li,i)=>(
+                <div key={i} style={{display:'flex',justifyContent:'space-between',fontSize:13,color:'var(--warm)',padding:'6px 0',borderBottom:'1px solid rgba(201,169,110,.06)'}}>
+                  <span>{li.l}</span><span style={{fontFamily:"'JetBrains Mono'",color:'var(--cream)'}}>{fmtF(li.v)}</span>
+                </div>
+              ))}
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:14,fontWeight:600,padding:'12px 0 0'}}>
+                <span style={{color:'var(--cream)'}}>Total</span>
+                <span style={{fontFamily:"'JetBrains Mono'",color:'var(--gold2)'}}>{fmtF(tot)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── DASHBOARD ── */
+function Dashboard({purchases,bookings,buyer,go}){
+  const[tab,setTab]=useState('overview');
+  const ti=purchases.reduce((s,p)=>s+p.downPayment,0);
+  const tb=bookings.reduce((s,b)=>s+b.total,0);
+  if(!buyer&&!purchases.length&&!bookings.length){
+    return(
+      <div style={{minHeight:'100vh',paddingTop:66,display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <div style={{textAlign:'center',maxWidth:380,padding:40}}>
+          <div style={{fontSize:52,marginBottom:16}}>🏠</div>
+          <h2 style={{fontFamily:"'Libre Baskerville'",fontSize:26,color:'var(--cream)',marginBottom:10}}>No Activity Yet</h2>
+          <p style={{color:'var(--warm)',fontSize:14,lineHeight:1.7,marginBottom:24}}>Complete a purchase or booking to see your account here.</p>
+          <div style={{display:'flex',gap:10,justifyContent:'center'}}>
+            <button className="btn-gold" onClick={()=>go('buy')}>Browse Properties</button>
+            <button className="btn-ghost" onClick={()=>go('stays')}>Book a Stay</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return(
+    <div style={{minHeight:'100vh',paddingTop:66}}>
+      <div style={{background:'var(--ink2)',borderBottom:'1px solid rgba(201,169,110,.07)',padding:'40px 32px 0'}}>
+        <div style={{maxWidth:1280,margin:'0 auto'}}>
+          <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.15em',marginBottom:8,fontWeight:500}}>My Account</div>
+          <h1 style={{fontFamily:"'Libre Baskerville'",fontSize:'clamp(24px,3.5vw,38px)',fontWeight:400,color:'var(--cream)',marginBottom:4,letterSpacing:'-.02em'}}>Welcome back{buyer?.name?`, ${buyer.name.split(' ')[0]}`:''}.</h1>
+          <p style={{fontSize:13,color:'var(--warm)',marginBottom:22}}>Your MAQ Group portfolio at a glance.</p>
+          <div style={{display:'flex',gap:0,borderBottom:'1px solid rgba(201,169,110,.1)'}}>
+            {[{k:'overview',l:'Overview'},{k:'properties',l:`Properties (${purchases.length})`},{k:'bookings',l:`Stays (${bookings.length})`}].map(t=>(
+              <button key={t.k} onClick={()=>setTab(t.k)} style={{padding:'11px 20px',border:'none',background:'none',cursor:'pointer',fontSize:13,color:tab===t.k?'var(--gold2)':'var(--warm)',fontWeight:tab===t.k?500:300,borderBottom:tab===t.k?'2px solid var(--gold)':'2px solid transparent',transition:'all .2s',marginBottom:-1}}>
+                {t.l}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div style={{maxWidth:1280,margin:'0 auto',padding:'32px 32px 80px'}}>
+        {tab==='overview'&&(
+          <div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:14,marginBottom:36}}>
+              {[{n:purchases.length,l:'Properties',ic:'🏠'},{n:bookings.length,l:'Stays Booked',ic:'🌊'},{n:fmtF(ti),l:'Invested',ic:'💰'},{n:fmtF(tb),l:'Bookings',ic:'📋'}].map((s,i)=>(
+                <div key={i} style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.1)',borderRadius:4,padding:'22px 20px'}}>
+                  <div style={{fontSize:22,marginBottom:10}}>{s.ic}</div>
+                  <div style={{fontFamily:"'Libre Baskerville'",fontSize:24,color:'var(--gold2)'}}>{s.n}</div>
+                  <div style={{fontSize:10,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginTop:4}}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+            {purchases.length>0&&<div style={{marginBottom:28}}><div style={{fontFamily:"'Libre Baskerville'",fontSize:19,color:'var(--cream)',marginBottom:14}}>Recent Properties</div>{purchases.slice(0,3).map((p,i)=><PRow key={i} p={p}/>)}</div>}
+            {bookings.length>0&&<div><div style={{fontFamily:"'Libre Baskerville'",fontSize:19,color:'var(--cream)',marginBottom:14}}>Recent Stays</div>{bookings.slice(0,3).map((b,i)=><BRow key={i} b={b}/>)}</div>}
+          </div>
+        )}
+        {tab==='properties'&&<div>{purchases.length===0?<Empty ic="🏠" ti="No properties yet" su="Browse to start building equity." ct="Browse Properties" fn={()=>go('buy')}/>:purchases.map((p,i)=><PRow key={i} p={p}/>)}</div>}
+        {tab==='bookings'&&<div>{bookings.length===0?<Empty ic="🌊" ti="No stays yet" su="Discover luxury short-term rentals." ct="Explore Stays" fn={()=>go('stays')}/>:bookings.map((b,i)=><BRow key={i} b={b}/>)}</div>}
+      </div>
+    </div>
+  );
+}
+function Empty({ic,ti,su,ct,fn}){return(<div style={{textAlign:'center',padding:'60px 0'}}><div style={{fontSize:46,marginBottom:14}}>{ic}</div><div style={{fontFamily:"'Libre Baskerville'",fontSize:21,color:'var(--warm)',marginBottom:8}}>{ti}</div><div style={{fontSize:13,color:'var(--warm2)',marginBottom:22}}>{su}</div><button className="btn-gold" onClick={fn}>{ct} →</button></div>);}
+function PRow({p}){return(<div style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.1)',borderRadius:8,padding:'18px 22px',marginBottom:10,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:14}}><div style={{display:'flex',gap:13,alignItems:'center'}}><div style={{fontSize:30}}>{p.property?.emoji||'🏠'}</div><div><div style={{fontFamily:"'DM Serif Display'",fontSize:15,color:'var(--cream)'}}>{p.property?.name}</div><div style={{fontSize:12,color:'var(--warm2)',marginTop:2}}>Purchased {p.date||'Recently'} · Owner Financed</div></div></div><div style={{display:'flex',gap:28,flexWrap:'wrap',alignItems:'center'}}><div><div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>Down Payment</div><div style={{fontFamily:"'JetBrains Mono'",fontSize:14,color:'var(--gold2)'}}>{fmtF(p.downPayment)}</div></div><div><div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>Monthly</div><div style={{fontFamily:"'JetBrains Mono'",fontSize:14,color:'#7DC89A'}}>{fmtM(p.monthly)}</div></div><span className="tag tgn">Active</span></div></div>);}
+function BRow({b}){
+  const fmt2=d=>{if(!d)return'—';try{return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch{return d;}};
+  return(
+    <div style={{background:'var(--ink2)',border:'1px solid rgba(201,169,110,.1)',borderRadius:8,padding:'18px 22px',marginBottom:10,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:14}}>
+      <div style={{display:'flex',gap:13,alignItems:'center'}}><div style={{fontSize:30}}>{b.stay?.emoji||'🏠'}</div><div><div style={{fontFamily:"'DM Serif Display'",fontSize:15,color:'var(--cream)'}}>{b.stay?.name}</div><div style={{fontSize:12,color:'var(--warm2)',marginTop:2}}>{b.checkIn&&b.checkOut?`${fmt2(b.checkIn)} – ${fmt2(b.checkOut)} · ${b.nights} nights`:`${b.nights} nights · ${b.stay?.beds}BR`}</div></div></div>
+      <div style={{display:'flex',gap:28,flexWrap:'wrap',alignItems:'center'}}>
+        <div><div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>Guests</div><div style={{fontFamily:"'JetBrains Mono'",fontSize:13,color:'var(--cream)'}}>{b.guests||b.stay?.guests||'—'}</div></div>
+        <div><div style={{fontSize:9,color:'var(--warm2)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:3}}>Total Paid</div><div style={{fontFamily:"'JetBrains Mono'",fontSize:14,color:'var(--gold2)'}}>{fmtF(b.total)}</div></div>
+        <span className="tag tgb">Confirmed</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── FOOTER ── */
+function Footer({go}){
+  return(
+    <footer style={{background:'var(--ink)',borderTop:'1px solid rgba(201,169,110,.07)',padding:'52px 32px 32px'}}>
+      <div style={{maxWidth:1280,margin:'0 auto'}}>
+        <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:36,marginBottom:44}}>
+          <div>
+            <div style={{display:'flex',alignItems:'center',gap:11,marginBottom:14}}>
+              <div style={{width:32,height:32,borderRadius:3,background:'linear-gradient(135deg,#C9A96E,#E8C98A)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'JetBrains Mono'",fontWeight:700,fontSize:9,color:INK}}>MAQ</div>
+              <div style={{fontFamily:"'Libre Baskerville'",fontSize:15,color:'var(--cream)'}}>MAQ Group</div>
+            </div>
+            <p style={{fontSize:13,color:'var(--warm2)',lineHeight:1.7,maxWidth:280,marginBottom:18}}>Premier real estate investment and management company. Owner financing available — no bank required.</p>
+            <div style={{fontSize:12,color:'var(--warm)'}}>📞 (561) 392-4800<br/><span style={{fontSize:11,color:'var(--warm2)'}}>www.maqgroupusa.com</span></div>
+          </div>
+          {[
+            {ti:'Properties',ls:[{l:'Vacant Land',k:'buy'},{l:'Residential',k:'buy'},{l:'Commercial',k:'buy'},{l:'For Lease',k:'buy'}]},
+            {ti:'MAQ Stays',ls:[{l:'All Stays',k:'stays'},{l:'Oceanfront',k:'stays'},{l:'Villas',k:'stays'},{l:'Estates',k:'stays'}]},
+            {ti:'Company',ls:[{l:'About MAQ',k:'home'},{l:'My Account',k:'dashboard'},{l:'Contact',k:'home'},{l:'Terms',k:'home'}]},
+          ].map((col,i)=>(
+            <div key={i}>
+              <div style={{fontSize:10,color:'var(--gold)',textTransform:'uppercase',letterSpacing:'.12em',fontWeight:600,marginBottom:14}}>{col.ti}</div>
+              <div style={{display:'flex',flexDirection:'column',gap:9}}>
+                {col.ls.map((l,j)=>(
+                  <button key={j} onClick={()=>go(l.k)} style={{background:'none',border:'none',color:'var(--warm2)',fontSize:13,cursor:'pointer',textAlign:'left',padding:0,transition:'color .2s'}}
+                    onMouseEnter={e=>e.target.style.color='var(--gold)'} onMouseLeave={e=>e.target.style.color='var(--warm2)'}>{l.l}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="divr" style={{marginBottom:20}}/>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:10}}>
+          <div style={{fontSize:11,color:'var(--warm2)'}}>© 2025 MAQ Group. All rights reserved. Boca Raton, FL.</div>
+          <div style={{fontSize:11,color:'var(--warm2)'}}>Owner Financing Available · Not a licensed mortgage lender</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
